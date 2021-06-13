@@ -9,11 +9,11 @@ class Hash_Themes_Column_Control extends WP_Customize_Control {
     }
 
     public function enqueue() {
-        wp_enqueue_script('nouislider', HASH_THEMES_CUSTOMIZER_URL . 'custom-controls/column-control/assets/nouislider.js', array('jquery'), HASH_THEMES_VER, true);
-        wp_enqueue_script('wNumb', HASH_THEMES_CUSTOMIZER_URL . 'custom-controls/column-control/assets/wNumb.js', array('jquery'), HASH_THEMES_VER, true);
-        wp_enqueue_script('hash-themes-column-control', HASH_THEMES_CUSTOMIZER_URL . 'custom-controls/column-control/assets/column-control.js', array('jquery'), HASH_THEMES_VER, true);
+        wp_enqueue_script('nouislider', HASH_THEMES_CUSTOMIZER_URL . 'custom-controls/column-control/assets/nouislider.js', array('jquery'), $this->get_version(), true);
+        wp_enqueue_script('wNumb', HASH_THEMES_CUSTOMIZER_URL . 'custom-controls/column-control/assets/wNumb.js', array('jquery'), $this->get_version(), true);
+        wp_enqueue_script('hash-themes-column-control', HASH_THEMES_CUSTOMIZER_URL . 'custom-controls/column-control/assets/column-control.js', array('jquery'), $this->get_version(), true);
 
-        wp_enqueue_style('nouislider', HASH_THEMES_CUSTOMIZER_URL . 'custom-controls/column-control/assets/nouislider.css', array(), HASH_THEMES_VER);
+        wp_enqueue_style('nouislider', HASH_THEMES_CUSTOMIZER_URL . 'custom-controls/column-control/assets/nouislider.css', array(), $this->get_version());
     }
 
     public function render_content() {

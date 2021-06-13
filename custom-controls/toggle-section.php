@@ -68,7 +68,7 @@ if (class_exists('WP_Customize_Section')) {
          * @return void
          */
         public function enqueue() {
-            wp_enqueue_script('hash-themes-toggle-section', HASH_THEMES_CUSTOMIZER_URL . 'custom-controls/assets/js/toggle-section.js', array('jquery'), HASH_THEMES_VER, true);
+            wp_enqueue_script('hash-themes-toggle-section', HASH_THEMES_CUSTOMIZER_URL . 'custom-controls/assets/js/toggle-section.js', array('jquery'), $this->get_version(), true);
         }
 
         /**

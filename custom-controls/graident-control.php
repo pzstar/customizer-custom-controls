@@ -14,9 +14,9 @@ class Hash_Themes_Gradient_Control extends WP_Customize_Control {
     }
 
     public function enqueue() {
-        wp_enqueue_script('color-picker', HASH_THEMES_CUSTOMIZER_URL . 'custom-controls/assets/js/colorpicker.js', array('jquery'), '1.0', true);
-        wp_enqueue_script('jquery-classygradient', HASH_THEMES_CUSTOMIZER_URL . 'custom-controls/assets/js/jquery.classygradient.js', array('jquery'), '1.0', true);
-        wp_enqueue_script('custom-gradient', HASH_THEMES_CUSTOMIZER_URL . 'custom-controls/assets/js/custom-gradient.js', array('jquery', 'jquery-ui-slider'), '1.0', true);
+        wp_enqueue_script('color-picker', HASH_THEMES_CUSTOMIZER_URL . 'custom-controls/assets/js/colorpicker.js', array('jquery'), $this->get_version(), true);
+        wp_enqueue_script('jquery-classygradient', HASH_THEMES_CUSTOMIZER_URL . 'custom-controls/assets/js/jquery.classygradient.js', array('jquery'), $this->get_version(), true);
+        wp_enqueue_script('custom-gradient', HASH_THEMES_CUSTOMIZER_URL . 'custom-controls/assets/js/custom-gradient.js', array('jquery', 'jquery-ui-slider'), $this->get_version(), true);
 
         wp_enqueue_style('color-picker', HASH_THEMES_CUSTOMIZER_URL . 'custom-controls/assets/css/colorpicker.css');
         wp_enqueue_style('jquery-classygradient', HASH_THEMES_CUSTOMIZER_URL . 'custom-controls/assets/css/jquery.classygradient.css');

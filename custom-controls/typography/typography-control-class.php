@@ -62,8 +62,8 @@ class Hash_Themes_Typography_Control extends WP_Customize_Control {
      * @return void
      */
     public function enqueue() {
-        wp_enqueue_script('hash-themes-customize-typograhpy-controls', HASH_THEMES_CUSTOMIZER_URL . 'custom-controls/typography/js/customize-controls.js', array('jquery'), HASH_THEMES_VER, true);
-        wp_enqueue_style('hash-themes-customize-typograhpy-controls', HASH_THEMES_CUSTOMIZER_URL . 'custom-controls/typography/css/customize-controls.css', array(), HASH_THEMES_VER);
+        wp_enqueue_script('hash-themes-customize-typograhpy-controls', HASH_THEMES_CUSTOMIZER_URL . 'custom-controls/typography/js/customize-controls.js', array('jquery'), $this->get_version(), true);
+        wp_enqueue_style('hash-themes-customize-typograhpy-controls', HASH_THEMES_CUSTOMIZER_URL . 'custom-controls/typography/css/customize-controls.css', array(), $this->get_version());
     }
 
     /**
