@@ -7,7 +7,7 @@ if (!class_exists('Hash_Themes_Register_Customizer_Controls')) {
         protected $version;
 
         function __construct() {
-            if (defined('TOTAL_VERSION')) {
+            if (defined('HASH_THEMES_VERSION')) {
                 $this->version = TOTAL_VERSION;
             } else {
                 $this->version = '1.0.0';

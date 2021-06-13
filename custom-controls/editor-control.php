@@ -1,7 +1,7 @@
 <?php
 
-/** Page Editor Control */
-class Hash_Themes_Page_Editor_Control extends WP_Customize_Control {
+/** Editor Control */
+class Hash_Themes_Editor_Control extends WP_Customize_Control {
 
     /**
      * Flag to do action admin_print_footer_scripts.

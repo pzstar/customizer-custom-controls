@@ -7,7 +7,7 @@ if (!class_exists('Hash_Themes_Customizer_Custom_Controls')) {
         protected $version;
 
         function __construct() {
-            if (defined('TOTAL_VERSION')) {
+            if (defined('HASH_THEMES_VERSION')) {
                 $this->version = TOTAL_VERSION;
             } else {
                 $this->version = '1.0.0';
@@ -21,10 +21,10 @@ if (!class_exists('Hash_Themes_Customizer_Custom_Controls')) {
         public function register_controls($wp_customize) {
             require HASH_THEMES_CUSTOMIZER_PATH . 'custom-controls/alpha-color-control.php';
             require HASH_THEMES_CUSTOMIZER_PATH . 'custom-controls/background-image-control.php';
-            require HASH_THEMES_CUSTOMIZER_PATH . 'custom-controls/category-dropdown-control.php';
             require HASH_THEMES_CUSTOMIZER_PATH . 'custom-controls/color-tab-control.php';
             require HASH_THEMES_CUSTOMIZER_PATH . 'custom-controls/date-control.php';
             require HASH_THEMES_CUSTOMIZER_PATH . 'custom-controls/dimensions-control.php';
+            require HASH_THEMES_CUSTOMIZER_PATH . 'custom-controls/editor-control.php';
             require HASH_THEMES_CUSTOMIZER_PATH . 'custom-controls/graident-control.php';
             require HASH_THEMES_CUSTOMIZER_PATH . 'custom-controls/heading-control.php';
             require HASH_THEMES_CUSTOMIZER_PATH . 'custom-controls/icon-selector-control.php';
@@ -32,7 +32,6 @@ if (!class_exists('Hash_Themes_Customizer_Custom_Controls')) {
             require HASH_THEMES_CUSTOMIZER_PATH . 'custom-controls/multiple-checkbox-control.php';
             require HASH_THEMES_CUSTOMIZER_PATH . 'custom-controls/multiple-select-control.php';
             require HASH_THEMES_CUSTOMIZER_PATH . 'custom-controls/multiple-selectize-control.php';
-            require HASH_THEMES_CUSTOMIZER_PATH . 'custom-controls/page-editor-control.php';
             require HASH_THEMES_CUSTOMIZER_PATH . 'custom-controls/range-slider-control.php';
             require HASH_THEMES_CUSTOMIZER_PATH . 'custom-controls/repeater-control.php';
             require HASH_THEMES_CUSTOMIZER_PATH . 'custom-controls/responsive-range-slider-control.php';
