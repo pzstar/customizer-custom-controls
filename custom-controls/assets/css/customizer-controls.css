@@ -1337,6 +1337,61 @@
     z-index: 2;
 }
 
+
+/*Gallery Control*/
+.hash-themes-gallery-container{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+}
+
+.hash-themes-gallery-container li{
+    height: 100px;
+    width: 120px;
+    position: relative;
+    margin: 0 10px 10px 0;
+}
+
+.hash-themes-gallery-container li span{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center;
+}
+
+.hash-themes-gallery-container li:after{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    opacity: 0;
+}
+
+.hash-themes-gallery-container li .hash-themes-gallery-remove{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 99;
+    color: #FFF;
+    text-decoration: none;
+    padding: 0;
+    line-height: 10px;
+    font-size: 18px;
+    opacity: 0;
+}
+
+.hash-themes-gallery-container li:hover:after,
+.hash-themes-gallery-container li:hover .hash-themes-gallery-remove{
+    opacity: 1;
+}
+
 /* Toggle Section Control*/
 .control-section-hash-themes-toggle-section .hash-themes-toggle-section{
     text-decoration: none;

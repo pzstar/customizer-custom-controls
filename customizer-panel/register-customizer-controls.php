@@ -29,11 +29,13 @@ if (!class_exists('Hash_Themes_Register_Customizer_Controls')) {
         }
 
         public function enqueue_customizer_script() {
-            wp_enqueue_style('total-customizer', HASH_THEMES_CUSTOMIZER_URL . 'customizer-panel/assets/customizer.css', array(), $this->get_version());
+            wp_enqueue_script('hash-themes-customizer', HASH_THEMES_CUSTOMIZER_URL . 'customizer-panel/assets/customizer.js', array('jquery'), $this->get_version(), true);
+            wp_enqueue_style('hash-themes-customizer', HASH_THEMES_CUSTOMIZER_URL . 'customizer-panel/assets/customizer.css', array(), $this->get_version());
         }
 
         public function enqueue_customize_preview_js() {
-            wp_enqueue_script('total-customizer', HASH_THEMES_CUSTOMIZER_URL . 'customizer-panel/assets/customizer-preview.js', array('customize-preview'), $this->get_version(), true);
+            wp_enqueue_script('webfont', HASH_THEMES_CUSTOMIZER_URL . 'custom-controls/typography/js/webfont.js', array('jquery'), $this->get_version(), false);
+            wp_enqueue_script('hash-themes-customizer', HASH_THEMES_CUSTOMIZER_URL . 'customizer-panel/assets/customizer-preview.js', array('customize-preview'), $this->get_version(), true);
         }
 
         public function get_version() {

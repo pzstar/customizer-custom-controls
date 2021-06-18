@@ -15,7 +15,6 @@ if (!class_exists('Hash_Themes_Customizer_Custom_Controls')) {
 
             add_action('customize_register', array($this, 'register_controls'));
             add_action('customize_controls_enqueue_scripts', array($this, 'enqueue_customizer_script'));
-            add_action('customize_preview_init', array($this, 'enqueue_customize_preview_js'));
         }
 
         public function register_controls($wp_customize) {
@@ -25,6 +24,7 @@ if (!class_exists('Hash_Themes_Customizer_Custom_Controls')) {
             require HASH_THEMES_CUSTOMIZER_PATH . 'custom-controls/date-control.php';
             require HASH_THEMES_CUSTOMIZER_PATH . 'custom-controls/dimensions-control.php';
             require HASH_THEMES_CUSTOMIZER_PATH . 'custom-controls/editor-control.php';
+            require HASH_THEMES_CUSTOMIZER_PATH . 'custom-controls/gallery-control.php';
             require HASH_THEMES_CUSTOMIZER_PATH . 'custom-controls/graident-control.php';
             require HASH_THEMES_CUSTOMIZER_PATH . 'custom-controls/heading-control.php';
             require HASH_THEMES_CUSTOMIZER_PATH . 'custom-controls/icon-selector-control.php';
@@ -78,12 +78,6 @@ if (!class_exists('Hash_Themes_Customizer_Custom_Controls')) {
             wp_enqueue_style('selectize', HASH_THEMES_CUSTOMIZER_URL . 'custom-controls/assets/css/selectize.css', array(), $this->get_version());
             wp_enqueue_style('chosen', HASH_THEMES_CUSTOMIZER_URL . 'custom-controls/assets/css/chosen.css', array(), $this->get_version());
             wp_enqueue_style('hash-themes-customizer-control', HASH_THEMES_CUSTOMIZER_URL . 'custom-controls/assets/css/customizer-controls.css', array('wp-color-picker'), $this->get_version());
-            wp_enqueue_style('hash-themes-customizer', HASH_THEMES_CUSTOMIZER_URL . 'customizer-panel/assets/css/customizer.css', array(), $this->get_version());
-        }
-
-        public function enqueue_customize_preview_js() {
-            wp_enqueue_script('webfont', HASH_THEMES_CUSTOMIZER_URL . 'custom-controls/typography/js/webfont.js', array('jquery'), $this->get_version(), false);
-            wp_enqueue_script('hash-themes-customizer', HASH_THEMES_CUSTOMIZER_URL . 'customizer-panel/assets/js/customizer-preview.js', array('customize-preview'), $this->get_version(), true);
         }
 
         public function get_version() {

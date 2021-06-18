@@ -9,7 +9,7 @@ jQuery(document).ready(function ($) {
             timer = setTimeout(callback, ms);
         };
     })();
-    
+
     // Select Preloader
     $('.ht-preloader-selector').on('change', function () {
         var activePreloader = $(this).val();
@@ -216,6 +216,93 @@ jQuery(document).ready(function ($) {
         $(this).addClass('active');
         $(this).closest('.hash-themes-color-tab-wrap').find('.hash-themes-color-tab-contents > div').hide();
         $(this).closest('.hash-themes-color-tab-wrap').find('.' + clicked).fadeIn();
+    });
+
+
+    //Gallery Control
+    $('.hash-themes-gallery-button').click(function (e) {
+        e.preventDefault();
+
+        var button = $(this);
+        var hiddenfield = button.prev();
+        if (hiddenfield.val()) {
+            var hiddenfieldvalue = hiddenfield.val().split(",");
+        } else {
+            var hiddenfieldvalue = new Array();
+        }
+
+        var frame = wp.media({
+            title: 'Insert Images',
+            library: {
+                type: 'image',
+                post__not_in: hiddenfieldvalue
+            },
+            button: {text: 'Use Images'},
+            multiple: 'add'
+        });
+
+        frame.on('select', function () {
+            var attachments = frame.state().get('selection').map(function (a) {
+                a.toJSON();
+                return a;
+            });
+            var i;
+            /* loop through all the images */
+            for (i = 0; i < attachments.length; ++i) {
+                /* add HTML element with an image */
+                $('ul.hash-themes-gallery-container').append('<li data-id="' + attachments[i].id + '"><span style="background-image:url(' + attachments[i].attributes.url + ')"></span><a href="#" class="hash-themes-gallery-remove">×</a></li>');
+                /* add an image ID to the array of all images */
+                hiddenfieldvalue.push(attachments[i].id);
+            }
+            /* refresh sortable */
+            $("ul.hash-themes-gallery-container").sortable("refresh");
+            /* add the IDs to the hidden field value */
+            hiddenfield.val(hiddenfieldvalue.join()).trigger('change');
+        }).open();
+    });
+
+    $('ul.hash-themes-gallery-container').sortable({
+        items: 'li',
+        cursor: '-webkit-grabbing', /* mouse cursor */
+        stop: function (event, ui) {
+            ui.item.removeAttr('style');
+
+            var sort = new Array(), /* array of image IDs */
+                    gallery = $(this); /* ul.hash-themes-gallery-container */
+
+            /* each time after dragging we resort our array */
+            gallery.find('li').each(function (index) {
+                sort.push($(this).attr('data-id'));
+            });
+            /* add the array value to the hidden input field */
+            gallery.next().val(sort.join()).trigger('change');
+        }
+    });
+
+    /*
+     * Remove certain images
+     */
+    $('body').on('click', '.hash-themes-gallery-remove', function () {
+        var id = $(this).parent().attr('data-id'),
+                gallery = $(this).parent().parent(),
+                hiddenfield = gallery.next(),
+                hiddenfieldvalue = hiddenfield.val().split(","),
+                i = hiddenfieldvalue.indexOf(id);
+
+        $(this).parent().remove();
+
+        /* remove certain array element */
+        if (i != -1) {
+            hiddenfieldvalue.splice(i, 1);
+        }
+
+        /* add the IDs to the hidden field value */
+        hiddenfield.val(hiddenfieldvalue.join()).trigger('change');
+
+        /* refresh sortable */
+        gallery.sortable("refresh");
+
+        return false;
     });
 
     // Scroll to Footer - add scroll to header as well
@@ -849,6 +936,17 @@ function ms_set_bg_color_value($container, $element, $obj) {
                 }
             });
             control.setting.set(newValue);
+        }
+    });
+
+    api.sectionConstructor['hash-themes-upgrade-section'] = api.Section.extend({
+
+        // No events for this type of section.
+        attachEvents: function () {},
+
+        // Always make the section active.
+        isContextuallyActive: function () {
+            return true;
         }
     });
 })(wp.customize);
