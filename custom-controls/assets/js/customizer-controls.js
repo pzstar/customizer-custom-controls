@@ -150,7 +150,7 @@ jQuery(document).ready(function ($) {
     });
 
     // Update slider if the input field loses focus as it's most likely changed
-    $('.customize-control-hash-themes-res-range-slider .hash-themes-slider-input').blur(function () {
+    $('.customize-control-hash-themes-range-slider .hash-themes-slider-input').blur(function () {
         var resetValue = $(this).val();
         var slider = $(this).parents('.customize-control-hash-themes-range-slider').find('.hash-themes-range-slider');
         var sliderMinValue = parseInt(slider.attr('slider-min-value'));
