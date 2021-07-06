@@ -380,7 +380,7 @@ jQuery(document).ready(function ($) {
                         }
                     });
                 });
-                field.find('.onoffswitch').each(function () {
+                field.find('.hash-themes-switch').each(function () {
                     var defaultValue = $(this).next('input[data-name]').attr('data-default');
                     $(this).next('input[data-name]').val(defaultValue);
                     if (defaultValue == 'on') {

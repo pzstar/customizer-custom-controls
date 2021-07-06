@@ -184,7 +184,7 @@ class Hash_Themes_Repeater_Control extends WP_Customize_Control {
 
                                     case 'switch':
                                         $switch = $field['switch'];
-                                        $switch_class = ($new_value == 'on') ? 'switch-on' : '';
+                                        $switch_class = ($new_value == 'on') ? 'hash-themes-switch-on' : '';
                                         echo '<div class="hash-themes-switch ' . esc_attr($switch_class) . '">';
                                         echo '<div class="hash-themes-switch-inner">';
                                         echo '<div class="hash-themes-switch-active">';
