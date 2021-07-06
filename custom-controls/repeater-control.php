@@ -185,13 +185,13 @@ class Hash_Themes_Repeater_Control extends WP_Customize_Control {
                                     case 'switch':
                                         $switch = $field['switch'];
                                         $switch_class = ($new_value == 'on') ? 'switch-on' : '';
-                                        echo '<div class="onoffswitch ' . esc_attr($switch_class) . '">';
-                                        echo '<div class="onoffswitch-inner">';
-                                        echo '<div class="onoffswitch-active">';
-                                        echo '<div class="onoffswitch-switch">' . esc_html($switch["on"]) . '</div>';
+                                        echo '<div class="hash-themes-switch ' . esc_attr($switch_class) . '">';
+                                        echo '<div class="hash-themes-switch-inner">';
+                                        echo '<div class="hash-themes-switch-active">';
+                                        echo '<div class="hash-themes-switch-button">' . esc_html($switch["on"]) . '</div>';
                                         echo '</div>';
-                                        echo '<div class="onoffswitch-inactive">';
-                                        echo '<div class="onoffswitch-switch">' . esc_html($switch["off"]) . '</div>';
+                                        echo '<div class="hash-themes-switch-inactive">';
+                                        echo '<div class="hash-themes-switch-button">' . esc_html($switch["off"]) . '</div>';
                                         echo '</div>';
                                         echo '</div>';
                                         echo '</div>';
@@ -201,7 +201,7 @@ class Hash_Themes_Repeater_Control extends WP_Customize_Control {
                                     case 'range':
                                         $options = $field['options'];
                                         $new_value = $new_value ? $new_value : $options['val'];
-                                        echo '<div class="hash-themes-hash-themes-responsive-range-slider" >';
+                                        echo '<div class="hash-themes-responsive-range-slider" >';
                                         echo '<div class="range-input" data-defaultvalue="' . esc_attr($options['val']) . '" data-value="' . esc_attr($new_value) . '" data-min="' . esc_attr($options['min']) . '" data-max="' . esc_attr($options['max']) . '" data-step="' . esc_attr($options['step']) . '"></div>';
                                         echo '<input  class="range-input-selector" type="text" disabled="disabled" value="' . esc_attr($new_value) . '"  data-name="' . esc_attr($key) . '"/>';
                                         echo '<span class="unit">' . esc_html($options['unit']) . '</span>';
