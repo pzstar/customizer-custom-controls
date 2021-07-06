@@ -10,13 +10,6 @@ jQuery(document).ready(function ($) {
         };
     })();
 
-    // Select Preloader
-    $('.ht-preloader-selector').on('change', function () {
-        var activePreloader = $(this).val();
-        $(this).next('.ht-preloader-container').find('.ht-preloader').hide();
-        $(this).next('.ht-preloader-container').find('.ht-' + activePreloader).show();
-    });
-
     // Icon Control JS
     $('body').on('click', '.hash-themes-icon-box-wrap .hash-themes-icon-list li', function () {
         var icon_class = $(this).find('i').attr('class');
