@@ -110,7 +110,7 @@ class Hash_Themes_Repeater_Control extends WP_Customize_Control {
                                             echo '<img src="' . esc_url($new_value) . '" style="max-width:100%;"/>';
                                         }
                                         echo '</div>';
-                                        echo '<div class="actions clearfix">';
+                                        echo '<div class="actions hash-themes-clearfix">';
                                         echo '<button type="button" class="button hash-themes-delete-button align-left">' . esc_html__('Remove', 'text-domain') . '</button>';
                                         echo '<button type="button" class="button hash-themes-upload-button alignright">' . esc_html__('Select Image', 'text-domain') . '</button>';
                                         echo '<input data-default="' . esc_attr($default) . '" class="upload-id" data-name="' . esc_attr($key) . '" type="hidden" value="' . esc_attr($new_value) . '"/>';
@@ -235,7 +235,7 @@ class Hash_Themes_Repeater_Control extends WP_Customize_Control {
                                         echo '</div>';
 
                                         if (apply_filters('hash_themes_show_ico_font', true)) {
-                                            echo '<ul class="hash-themes-icon-list icofont-list clearfix active">';
+                                            echo '<ul class="hash-themes-icon-list icofont-list hash-themes-clearfix active">';
                                             $hash_themes_icofont_icon_array = hash_themes_icofont_icon_array();
                                             foreach ($hash_themes_icofont_icon_array as $hash_themes_icofont_icon) {
                                                 $icon_class = $new_value == $hash_themes_icofont_icon ? 'icon-active' : '';
@@ -245,7 +245,7 @@ class Hash_Themes_Repeater_Control extends WP_Customize_Control {
                                         }
 
                                         if (apply_filters('hash_themes_show_material_icon', true)) {
-                                            echo '<ul class="hash-themes-icon-list material-icon-list clearfix">';
+                                            echo '<ul class="hash-themes-icon-list material-icon-list hash-themes-clearfix">';
                                             $hash_themes_materialdesignicons_icon_array = hash_themes_materialdesignicons_array();
                                             foreach ($hash_themes_materialdesignicons_icon_array as $hash_themes_materialdesignicons_icon) {
                                                 $icon_class = $new_value == $hash_themes_materialdesignicons_icon ? 'icon-active' : '';
@@ -255,7 +255,7 @@ class Hash_Themes_Repeater_Control extends WP_Customize_Control {
                                         }
 
                                         if (apply_filters('hash_themes_show_elegant_icon', true)) {
-                                            echo '<ul class="hash-themes-icon-list elegant-icon-list clearfix">';
+                                            echo '<ul class="hash-themes-icon-list elegant-icon-list hash-themes-clearfix">';
                                             $hash_themes_eleganticons_icon_array = hash_themes_eleganticons_array();
                                             foreach ($hash_themes_eleganticons_icon_array as $hash_themes_eleganticons_icon) {
                                                 $icon_class = $new_value == $hash_themes_eleganticons_icon ? 'icon-active' : '';
@@ -293,7 +293,7 @@ class Hash_Themes_Repeater_Control extends WP_Customize_Control {
                         <?php }
                         ?>
 
-                        <div class="clearfix hash-themes-repeater-footer">
+                        <div class="hash-themes-clearfix hash-themes-repeater-footer">
                             <div class="alignright">
                                 <a class="hash-themes-repeater-field-remove" href="#remove"><?php esc_html_e('Delete', 'text-domain') ?></a> |
                                 <a class="hash-themes-repeater-field-close" href="#close"><?php esc_html_e('Close', 'text-domain') ?></a>

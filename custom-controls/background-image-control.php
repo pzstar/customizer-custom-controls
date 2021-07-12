@@ -122,7 +122,7 @@ class Hash_Themes_Background_Image_Control extends WP_Customize_Control {
             <# } #>
         </div>
 
-        <div class="hash-themes-actions clearfix">
+        <div class="hash-themes-actions hash-themes-clearfix">
             <button type="button" class="button hash-themes-upload-button align-left">{{{ data.button_label.select }}}</button>
             <button type="button" class="button hash-themes-remove-button alignright">{{{ data.button_label.remove }}}</button>
         </div>

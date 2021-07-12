@@ -37,7 +37,7 @@ class Hash_Themes_Icon_Selector_Control extends WP_Customize_Control {
                         <input type="text" class="hash-themes-icon-search-input" placeholder="<?php echo esc_attr__('Type to filter', 'text-domain'); ?>" />
                     </div>
 
-                    <ul class="hash-themes-icon-list clearfix active">
+                    <ul class="hash-themes-icon-list hash-themes-clearfix active">
                         <?php
                         if (isset($this->icon_array) && !empty($this->icon_array)) {
                             $icon_array = $this->icon_array;

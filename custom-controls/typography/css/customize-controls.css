@@ -22,7 +22,8 @@
     position: relative;
     height: 4px;
     margin: 0;
-    background-color: rgba(0, 0, 0, .15);
+    background: rgba(0, 0, 0, .15);
+    border: none;
     border-radius: 5px;
     cursor: pointer;
     -webkit-transition: background .5s;
@@ -31,7 +32,7 @@
 }
 
 .hash-themes-typography-slider-range:hover {
-    background-color: rgba(0, 0, 0, .2);
+    background: rgba(0, 0, 0, .2);
 }
 
 .hash-themes-typography-slider-range .ui-slider-range {
@@ -39,16 +40,18 @@
     position: absolute;
     top: 0;
     height: 100%;
-    background-color: #13a1dc;
+    background: #13a1dc;
 }
 
 .hash-themes-typography-slider-range .ui-slider-handle {
     height: 16px;
     width: 16px;
-    background-color: #fff;
+    background: #fff;
+    border: none;
     display: inline-block;
     position: absolute;
     top: 50%;
+    margin: 0;
     -webkit-transform: translateY(-50%) translateX(-4px);
     transform: translateY(-50%) translateX(-4px);
     -webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
