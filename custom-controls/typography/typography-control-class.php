@@ -42,14 +42,14 @@ class Hash_Themes_Typography_Control extends WP_Customize_Control {
         // Make sure we have labels.
         $this->l10n = wp_parse_args(
                 $this->l10n, array(
-            'family' => esc_html__('Font Family', 'text-domain'),
-            'style' => esc_html__('Font Weight/Style', 'text-domain'),
-            'text_transform' => esc_html__('Text Transform', 'text-domain'),
-            'text_decoration' => esc_html__('Text Decoration', 'text-domain'),
-            'size' => esc_html__('Font Size', 'text-domain'),
-            'line_height' => esc_html__('Line Height', 'text-domain'),
-            'letter_spacing' => esc_html__('Letter Spacing', 'text-domain'),
-            'color' => esc_html__('Font Color', 'text-domain')
+            'family' => esc_html__('Font Family', 'hash-themes'),
+            'style' => esc_html__('Font Weight/Style', 'hash-themes'),
+            'text_transform' => esc_html__('Text Transform', 'hash-themes'),
+            'text_decoration' => esc_html__('Text Decoration', 'hash-themes'),
+            'size' => esc_html__('Font Size', 'hash-themes'),
+            'line_height' => esc_html__('Line Height', 'hash-themes'),
+            'letter_spacing' => esc_html__('Letter Spacing', 'hash-themes'),
+            'color' => esc_html__('Font Color', 'hash-themes')
                 )
         );
     }
@@ -62,8 +62,8 @@ class Hash_Themes_Typography_Control extends WP_Customize_Control {
      * @return void
      */
     public function enqueue() {
-        wp_enqueue_script('hash-themes-customize-typograhpy-controls', HASH_THEMES_CUSTOMIZER_URL . 'custom-controls/typography/js/customize-controls.js', array('jquery'), $this->get_version(), true);
-        wp_enqueue_style('hash-themes-customize-typograhpy-controls', HASH_THEMES_CUSTOMIZER_URL . 'custom-controls/typography/css/customize-controls.css', array(), $this->get_version());
+        wp_enqueue_script('hash-themes-customize-typograhpy-controls', HASH_THEMES_CUSTOMIZER_URL . 'custom-controls/typography/js/customize-controls.js', array('jquery'), HASH_THEMES_VERSION, true);
+        wp_enqueue_style('hash-themes-customize-typograhpy-controls', HASH_THEMES_CUSTOMIZER_URL . 'custom-controls/typography/css/customize-controls.css', array(), HASH_THEMES_VERSION);
     }
 
     /**
@@ -249,7 +249,7 @@ class Hash_Themes_Typography_Control extends WP_Customize_Control {
                 <# } #>
 
                 <div class="customize-control-content">
-                    <input class="hash-themes-color-picker-hex" type="text" maxlength="7" placeholder="<?php esc_attr_e('Hex Value', 'text-domain'); ?>" {{{ data.color.link }}} value="{{ data.color.value }}"  />
+                    <input class="hash-themes-color-picker-hex" type="text" maxlength="7" placeholder="<?php esc_attr_e('Hex Value', 'hash-themes'); ?>" {{{ data.color.link }}} value="{{ data.color.value }}"  />
                 </div>
             </li>
             <# } #>
@@ -340,8 +340,10 @@ class Hash_Themes_Typography_Control extends WP_Customize_Control {
             return $variants_array;
         } else {
             return array(
-                '400' => esc_html__('Normal', 'text-domain'),
-                '700' => esc_html__('Bold', 'text-domain')
+                '400' => esc_html__('Normal', 'hash-themes'),
+                '400italic' => esc_html__('Normal Italic', 'hash-themes'),
+                '700' => esc_html__('Bold', 'hash-themes'),
+                '700italic' => esc_html__('Bold Italic', 'hash-themes')
             );
         }
     }
@@ -355,10 +357,10 @@ class Hash_Themes_Typography_Control extends WP_Customize_Control {
      */
     public function get_text_decoration_choices() {
         return array(
-            'none' => esc_html__('None', 'text-domain'),
-            'underline' => esc_html__('Underline', 'text-domain'),
-            'line-through' => esc_html__('Line-through', 'text-domain'),
-            'overline' => esc_html__('Overline', 'text-domain')
+            'none' => esc_html__('None', 'hash-themes'),
+            'underline' => esc_html__('Underline', 'hash-themes'),
+            'line-through' => esc_html__('Line-through', 'hash-themes'),
+            'overline' => esc_html__('Overline', 'hash-themes')
         );
     }
 
@@ -371,10 +373,10 @@ class Hash_Themes_Typography_Control extends WP_Customize_Control {
      */
     public function get_text_transform_choices() {
         return array(
-            'none' => esc_html__('None', 'text-domain'),
-            'uppercase' => esc_html__('Uppercase', 'text-domain'),
-            'lowercase' => esc_html__('Lowercase', 'text-domain'),
-            'capitalize' => esc_html__('Capitalize', 'text-domain')
+            'none' => esc_html__('None', 'hash-themes'),
+            'uppercase' => esc_html__('Uppercase', 'hash-themes'),
+            'lowercase' => esc_html__('Lowercase', 'hash-themes'),
+            'capitalize' => esc_html__('Capitalize', 'hash-themes')
         );
     }
 

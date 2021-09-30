@@ -8,7 +8,7 @@ if (!class_exists('Hash_Themes_Register_Customizer_Controls')) {
 
         function __construct() {
             if (defined('HASH_THEMES_VERSION')) {
-                $this->version = TOTAL_VERSION;
+                $this->version = HASH_THEMES_VERSION;
             } else {
                 $this->version = '1.0.0';
             }
@@ -19,13 +19,11 @@ if (!class_exists('Hash_Themes_Register_Customizer_Controls')) {
         }
 
         public function register_customizer_settings($wp_customize) {
-            $wp_customize->get_section('static_front_page')->priority = 1;
-
             /** Theme Options */
             //require HASH_THEMES_CUSTOMIZER_PATH . 'customizer-panel/general-settings.php';
 
             /** For Additional Hooks */
-            do_action('total_new_options', $wp_customize);
+            do_action('hash_themes_new_options', $wp_customize);
         }
 
         public function enqueue_customizer_script() {
@@ -35,7 +33,7 @@ if (!class_exists('Hash_Themes_Register_Customizer_Controls')) {
 
         public function enqueue_customize_preview_js() {
             wp_enqueue_script('webfont', HASH_THEMES_CUSTOMIZER_URL . 'custom-controls/typography/js/webfont.js', array('jquery'), $this->get_version(), false);
-            wp_enqueue_script('hash-themes-customizer', HASH_THEMES_CUSTOMIZER_URL . 'customizer-panel/assets/customizer-preview.js', array('customize-preview'), $this->get_version(), true);
+            wp_enqueue_script('hash-themes-customizer-preview', HASH_THEMES_CUSTOMIZER_URL . 'customizer-panel/assets/customizer-preview.js', array('customize-preview'), $this->get_version(), true);
         }
 
         public function get_version() {

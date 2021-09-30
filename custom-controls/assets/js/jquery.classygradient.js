@@ -71,7 +71,7 @@
             out += 'background: ' + '-moz-linear-gradient(' + defDir + ',' + defCss + ');' + '\n';
             out += 'background: ' + '-webkit-linear-gradient(' + defDir + ',' + defCss + ');' + '\n';
             out += 'background: ' + '-o-linear-gradient(' + defDir + ',' + defCss + ');' + '\n';
-            out += 'background: ' + '-hash-themes-linear-gradient(' + defDir + ',' + defCss + ');' + '\n';
+            out += 'background: ' + '-ms-linear-gradient(' + defDir + ',' + defCss + ');' + '\n';
             out += 'background: ' + 'linear-gradient(' + defDir + ',' + defCss + ');';
             return out;
         };
@@ -268,7 +268,7 @@
             target.css('background', '-moz-linear-gradient(' + defDir + ',' + defCss + ')');
             target.css('background', '-webkit-linear-gradient(' + defDir + ',' + defCss + ')');
             target.css('background', '-o-linear-gradient(' + defDir + ',' + defCss + ')');
-            target.css('background', '-hash-themes-linear-gradient(' + defDir + ',' + defCss + ')');
+            target.css('background', '-ms-linear-gradient(' + defDir + ',' + defCss + ')');
             target.css('background', 'linear-gradient(' + defDir + ',' + defCss + ')');
         };
         this._renderToTarget = function () {

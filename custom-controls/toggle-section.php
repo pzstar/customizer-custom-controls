@@ -42,8 +42,9 @@ if (class_exists('WP_Customize_Section')) {
         public function __construct(WP_Customize_Manager $manager, $id, array $args = array()) {
             parent::__construct($manager, $id, $args);
 
+            $default = isset($args['default']) ? $args['default'] : 'off';
             if (isset($args['hiding_control'])) {
-                $this->hide = get_theme_mod($args['hiding_control'], 'off');
+                $this->hide = get_theme_mod($args['hiding_control'], $default);
             }
 
             add_action('customize_controls_init', array($this, 'enqueue'));
@@ -68,7 +69,7 @@ if (class_exists('WP_Customize_Section')) {
          * @return void
          */
         public function enqueue() {
-            wp_enqueue_script('hash-themes-toggle-section', HASH_THEMES_CUSTOMIZER_URL . 'custom-controls/assets/js/toggle-section.js', array('jquery'), $this->get_version(), true);
+            wp_enqueue_script('hash-themes-toggle-section', HASH_THEMES_CUSTOMIZER_URL . 'custom-controls/assets/js/toggle-section.js', array('jquery'), HASH_THEMES_VERSION, true);
         }
 
         /**

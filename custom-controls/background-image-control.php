@@ -82,6 +82,9 @@ class Hash_Themes_Background_Image_Control extends WP_Customize_Control {
             );
 
             if ('image_url' === $setting_key) {
+                /*
+                $this->json['attachment'] = wp_prepare_attachment_for_js($attachment_id);
+                
                 if ($this->value($setting_key)) {
                     // Get the attachment model for the existing file.
                     $attachment_id = attachment_url_to_postid($this->value($setting_key));
@@ -89,14 +92,15 @@ class Hash_Themes_Background_Image_Control extends WP_Customize_Control {
                         $this->json['attachment'] = wp_prepare_attachment_for_js($attachment_id);
                     }
                 }
+                */
             } elseif ('repeat' === $setting_key) {
                 $this->json[$setting_key]['choices'] = $background_choices['repeat'];
             } elseif ('size' === $setting_key) {
                 $this->json[$setting_key]['choices'] = $background_choices['size'];
             } elseif ('position' === $setting_key) {
                 $this->json[$setting_key]['choices'] = $background_choices['position'];
-            } elseif ('attach' === $setting_key) {
-                $this->json[$setting_key]['choices'] = $background_choices['attach'];
+            } elseif ('attachment' === $setting_key) {
+                $this->json[$setting_key]['choices'] = $background_choices['attachment'];
             }
         }
     }
@@ -112,7 +116,7 @@ class Hash_Themes_Background_Image_Control extends WP_Customize_Control {
         <span class="customize-control-title">{{{ data.label }}}</span>
         <# } #>
 
-        <div class="hash-themes-placeholder <# if ( data.attachment ) { #>hidden<# } #>">
+        <div class="hash-themes-placeholder <# if ( data.image_url.value ) { #>hidden<# } #>">
             {{{ data.button_label.select }}}
         </div>
 
@@ -131,7 +135,7 @@ class Hash_Themes_Background_Image_Control extends WP_Customize_Control {
 
                <input class="hash-themes-background-image-id" type="hidden" value="{{ data.image_id.value }}" {{{ data.image_id.link }}}>
 
-               <div class="hash-themes-background-image-fields" <# if ( !data.attachment ) { #> style="display:none "<# } #>>
+               <div class="hash-themes-background-image-fields" <# if ( !data.image_url.value ) { #> style="display:none "<# } #>>
                <# if ( data.repeat && data.repeat.choices ) { #>
                <li class="background-image-repeat">
                 <# if ( data.repeat.label ) { #>
@@ -171,14 +175,14 @@ class Hash_Themes_Background_Image_Control extends WP_Customize_Control {
             </li>
             <# } #>
 
-            <# if ( data.attach && data.attach.choices ) { #>
-            <li class="background-image-attach">
-                <# if ( data.attach.label ) { #>
-                <span class="customize-control-title">{{ data.attach.label }}</span>
+            <# if ( data.attachment && data.attachment.choices ) { #>
+            <li class="background-image-attachment">
+                <# if ( data.attachment.label ) { #>
+                <span class="customize-control-title">{{ data.attachment.label }}</span>
                 <# } #>
-                <select {{{ data.attach.link }}}>
-                    <# _.each( data.attach.choices, function( label, choice ) { #>
-                    <option value="{{ choice }}" <# if ( choice === data.attach.value ) { #> selected="selected" <# } #>>{{ label }}</option>
+                <select {{{ data.attachment.link }}}>
+                    <# _.each( data.attachment.choices, function( label, choice ) { #>
+                    <option value="{{ choice }}" <# if ( choice === data.attachment.value ) { #> selected="selected" <# } #>>{{ label }}</option>
                     <# } ) #>
                 </select>
             </li>
@@ -213,8 +217,8 @@ class Hash_Themes_Background_Image_Control extends WP_Customize_Control {
     public static function get_button_labels() {
 
         $button_labels = array(
-            'select' => esc_html__('Select Image', 'text-domain'),
-            'remove' => esc_html__('Remove', 'text-domain'),
+            'select' => esc_html__('Select Image', 'hash-themes'),
+            'remove' => esc_html__('Remove', 'hash-themes'),
         );
 
         return $button_labels;
@@ -228,12 +232,12 @@ class Hash_Themes_Background_Image_Control extends WP_Customize_Control {
     public static function get_field_labels() {
 
         $field_labels = array(
-            'repeat' => esc_html__('Repeat', 'text-domain'),
-            'size' => esc_html__('Size', 'text-domain'),
-            'position' => esc_html__('Position', 'text-domain'),
-            'attach' => esc_html__('Attachment', 'text-domain'),
-            'color' => esc_html__('Background Color', 'text-domain'),
-            'overlay' => esc_html__('Overlay Color', 'text-domain')
+            'repeat' => esc_html__('Repeat', 'hash-themes'),
+            'size' => esc_html__('Size', 'hash-themes'),
+            'position' => esc_html__('Position', 'hash-themes'),
+            'attachment' => esc_html__('Attachment', 'hash-themes'),
+            'color' => esc_html__('Background Color', 'hash-themes'),
+            'overlay' => esc_html__('Overlay Color', 'hash-themes')
         );
 
         return $field_labels;
@@ -249,30 +253,30 @@ class Hash_Themes_Background_Image_Control extends WP_Customize_Control {
 
         $choices = array(
             'repeat' => array(
-                'no-repeat' => esc_html__('No Repeat', 'text-domain'),
-                'repeat' => esc_html__('Tile', 'text-domain'),
-                'repeat-x' => esc_html__('Tile Horizontally', 'text-domain'),
-                'repeat-y' => esc_html__('Tile Vertically', 'text-domain')
+                'no-repeat' => esc_html__('No Repeat', 'hash-themes'),
+                'repeat' => esc_html__('Tile', 'hash-themes'),
+                'repeat-x' => esc_html__('Tile Horizontally', 'hash-themes'),
+                'repeat-y' => esc_html__('Tile Vertically', 'hash-themes')
             ),
             'size' => array(
-                'auto' => esc_html__('Default', 'text-domain'),
-                'cover' => esc_html__('Cover', 'text-domain'),
-                'contain' => esc_html__('Contain', 'text-domain')
+                'auto' => esc_html__('Default', 'hash-themes'),
+                'cover' => esc_html__('Cover', 'hash-themes'),
+                'contain' => esc_html__('Contain', 'hash-themes')
             ),
             'position' => array(
-                'left-top' => esc_html__('Left Top', 'text-domain'),
-                'left-center' => esc_html__('Left Center', 'text-domain'),
-                'left-bottom' => esc_html__('Left Bottom', 'text-domain'),
-                'right-top' => esc_html__('Right Top', 'text-domain'),
-                'right-center' => esc_html__('Right Center', 'text-domain'),
-                'right-bottom' => esc_html__('Right Bottom', 'text-domain'),
-                'center-top' => esc_html__('Center Top', 'text-domain'),
-                'center-center' => esc_html__('Center Center', 'text-domain'),
-                'center-bottom' => esc_html__('Center Bottom', 'text-domain')
+                'left-top' => esc_html__('Left Top', 'hash-themes'),
+                'left-center' => esc_html__('Left Center', 'hash-themes'),
+                'left-bottom' => esc_html__('Left Bottom', 'hash-themes'),
+                'right-top' => esc_html__('Right Top', 'hash-themes'),
+                'right-center' => esc_html__('Right Center', 'hash-themes'),
+                'right-bottom' => esc_html__('Right Bottom', 'hash-themes'),
+                'center-top' => esc_html__('Center Top', 'hash-themes'),
+                'center-center' => esc_html__('Center Center', 'hash-themes'),
+                'center-bottom' => esc_html__('Center Bottom', 'hash-themes')
             ),
-            'attach' => array(
-                'fixed' => esc_html__('Fixed', 'text-domain'),
-                'scroll' => esc_html__('Scroll', 'text-domain')
+            'attachment' => array(
+                'fixed' => esc_html__('Fixed', 'hash-themes'),
+                'scroll' => esc_html__('Scroll', 'hash-themes')
             )
         );
 

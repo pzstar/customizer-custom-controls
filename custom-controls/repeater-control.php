@@ -76,10 +76,10 @@ class Hash_Themes_Repeater_Control extends WP_Customize_Control {
                                 <?php
                                 $label = isset($field['label']) ? $field['label'] : '';
                                 $description = isset($field['description']) ? $field['description'] : '';
-                                if ($field['type'] != 'toggle') {
+                                if ($field['type'] != 'toggle' && $field['type'] != 'checkbox') {
                                     ?>
                                     <span class="customize-control-repeater-title"><?php echo esc_html($label); ?></span>
-                                    <span class="description customize-control-description"><?php echo esc_html($description); ?></span>
+                                    <span class="description customize-control-description"><?php echo wp_kses_post($description); ?></span>
                                     <?php
                                 }
 
@@ -103,7 +103,7 @@ class Hash_Themes_Repeater_Control extends WP_Customize_Control {
                                         echo '<div class="hash-themes-fields-wrap">';
                                         echo '<div class="attachment-media-view">';
                                         echo '<div class="placeholder' . esc_attr($image_class) . '">';
-                                        esc_html_e('No image selected', 'text-domain');
+                                        esc_html_e('No image selected', 'hash-themes');
                                         echo '</div>';
                                         echo '<div class="thumbnail thumbnail-image">';
                                         if ($new_value) {
@@ -111,8 +111,8 @@ class Hash_Themes_Repeater_Control extends WP_Customize_Control {
                                         }
                                         echo '</div>';
                                         echo '<div class="actions hash-themes-clearfix">';
-                                        echo '<button type="button" class="button hash-themes-delete-button align-left">' . esc_html__('Remove', 'text-domain') . '</button>';
-                                        echo '<button type="button" class="button hash-themes-upload-button alignright">' . esc_html__('Select Image', 'text-domain') . '</button>';
+                                        echo '<button type="button" class="button hash-themes-delete-button align-left">' . esc_html__('Remove', 'hash-themes') . '</button>';
+                                        echo '<button type="button" class="button hash-themes-upload-button alignright">' . esc_html__('Select Image', 'hash-themes') . '</button>';
                                         echo '<input data-default="' . esc_attr($default) . '" class="upload-id" data-name="' . esc_attr($key) . '" type="hidden" value="' . esc_attr($new_value) . '"/>';
                                         echo '</div>';
                                         echo '</div>';
@@ -121,7 +121,7 @@ class Hash_Themes_Repeater_Control extends WP_Customize_Control {
 
                                     case 'category':
                                         echo '<select data-default="' . esc_attr($default) . '"  data-name="' . esc_attr($key) . '">';
-                                        echo '<option value="-1" ' . selected($new_value, '-1', false) . '>' . esc_html__('Latest Posts', 'text-domain') . '</option>';
+                                        echo '<option value="-1" ' . selected($new_value, '-1', false) . '>' . esc_html__('Latest Posts', 'hash-themes') . '</option>';
                                         foreach ($this->cats as $cat) {
                                             printf('<option value="%1$s" %2$s>%3$s</option>', esc_attr($cat->term_id), selected($new_value, $cat->term_id, false), esc_html($cat->name));
                                         }
@@ -150,6 +150,14 @@ class Hash_Themes_Repeater_Control extends WP_Customize_Control {
                                         if (!empty($description)) {
                                             echo '<span class="description customize-control-description">' . esc_html($description) . '</span>';
                                         }
+                                        break;
+
+                                    case 'checkbox':
+                                        echo '<label>';
+                                        echo '<input data-default="' . esc_attr($default) . '" value="' . esc_attr($new_value) . '" data-name="' . esc_attr($key) . '" type="checkbox" ' . checked($new_value, 'yes', false) . '/>';
+                                        echo esc_html($label);
+                                        echo '<span class="description customize-control-description">' . esc_html($description) . '</span>';
+                                        echo '</label>';
                                         break;
 
                                     case 'colorpicker':
@@ -201,10 +209,12 @@ class Hash_Themes_Repeater_Control extends WP_Customize_Control {
                                     case 'range':
                                         $options = $field['options'];
                                         $new_value = $new_value ? $new_value : $options['val'];
-                                        echo '<div class="hash-themes-responsive-range-slider" >';
-                                        echo '<div class="range-input" data-defaultvalue="' . esc_attr($options['val']) . '" data-value="' . esc_attr($new_value) . '" data-min="' . esc_attr($options['min']) . '" data-max="' . esc_attr($options['max']) . '" data-step="' . esc_attr($options['step']) . '"></div>';
-                                        echo '<input  class="range-input-selector" type="text" disabled="disabled" value="' . esc_attr($new_value) . '"  data-name="' . esc_attr($key) . '"/>';
-                                        echo '<span class="unit">' . esc_html($options['unit']) . '</span>';
+                                        echo '<div class="hash-themes-range-slider-control-wrap">';
+                                        echo '<div class="hash-themes-range-slider" data-default="' . esc_attr($options['val']) . '" data-value="' . esc_attr($new_value) . '" data-min="' . esc_attr($options['min']) . '" data-max="' . esc_attr($options['max']) . '" data-step="' . esc_attr($options['step']) . '"></div>';
+                                        echo '<div class="hash-themes-range-slider-input">';
+                                        echo '<input type="number" disabled="disabled" value="' . esc_attr($new_value) . '"  data-name="' . esc_attr($key) . '"/>';
+                                        echo '</div>';
+                                        echo '<span class="hash-themes-range-slider-unit">' . esc_html($options['unit']) . '</span>';
                                         echo '</div>';
                                         break;
 
@@ -212,56 +222,48 @@ class Hash_Themes_Repeater_Control extends WP_Customize_Control {
                                         echo '<div class="hash-themes-icon-box-wrap">';
                                         echo '<div class="hash-themes-selected-icon">';
                                         echo '<i class="' . esc_attr($new_value) . '"></i>';
-                                        echo '<span><i class="icofont-simple-down"></i></span>';
+                                        echo '<span><i class="hash-themes-down-icon"></i></span>';
                                         echo '</div>';
                                         echo '<div class="hash-themes-icon-box">';
                                         echo '<div class="hash-themes-icon-search">';
                                         echo '<select>';
 
-                                        if (apply_filters('hash_themes_show_ico_font', true)) {
-                                            echo '<option value="icofont-list">' . esc_html__('Ico Font', 'text-domain') . '</option>';
-                                        }
+                                        //See customizer-fonts-iucon.php file
+                                        $hash_themes_icons = apply_filter('hash_themes_register_icon', array());
 
-                                        if (apply_filters('hash_themes_show_material_icon', true)) {
-                                            echo '<option value="material-icon-list">' . esc_html__('Material Icon', 'text-domain') . '</option>';
-                                        }
-
-                                        if (apply_filters('hash_themes_show_elegant_icon', true)) {
-                                            echo '<option value="elegant-icon-list">' . esc_html__('Elegant Icon', 'text-domain') . '</option>';
+                                        if ($hash_themes_icons && is_array($hash_themes_icons)) {
+                                            foreach ($hash_themes_icons as $hash_themes_icon) {
+                                                if ($hash_themes_icon['name'] && $hash_themes_icon['label']) {
+                                                    echo '<option value="' . esc_attr($hash_themes_icon['name']) . '">' . esc_html__($hash_themes_icon['label']) . '</option>';
+                                                }
+                                            }
                                         }
 
                                         echo '</select>';
-                                        echo '<input type="text" class="hash-themes-icon-search-input" placeholder="' . esc_html__('Type to filter', 'text-domain') . '" />';
+                                        echo '<input type="text" class="hash-themes-icon-search-input" placeholder="' . esc_html__('Type to filter', 'hash-themes') . '" />';
                                         echo '</div>';
 
-                                        if (apply_filters('hash_themes_show_ico_font', true)) {
-                                            echo '<ul class="hash-themes-icon-list icofont-list hash-themes-clearfix active">';
-                                            $hash_themes_icofont_icon_array = hash_themes_icofont_icon_array();
-                                            foreach ($hash_themes_icofont_icon_array as $hash_themes_icofont_icon) {
-                                                $icon_class = $new_value == $hash_themes_icofont_icon ? 'icon-active' : '';
-                                                echo '<li class=' . esc_attr($icon_class) . '><i class="' . esc_attr($hash_themes_icofont_icon) . '"></i></li>';
-                                            }
-                                            echo '</ul>';
-                                        }
 
-                                        if (apply_filters('hash_themes_show_material_icon', true)) {
-                                            echo '<ul class="hash-themes-icon-list material-icon-list hash-themes-clearfix">';
-                                            $hash_themes_materialdesignicons_icon_array = hash_themes_materialdesignicons_array();
-                                            foreach ($hash_themes_materialdesignicons_icon_array as $hash_themes_materialdesignicons_icon) {
-                                                $icon_class = $new_value == $hash_themes_materialdesignicons_icon ? 'icon-active' : '';
-                                                echo '<li class=' . esc_attr($icon_class) . '><i class="' . esc_attr($hash_themes_materialdesignicons_icon) . '"></i></li>';
-                                            }
-                                            echo '</ul>';
-                                        }
+                                        $hash_themes_active_class = ' active';
 
-                                        if (apply_filters('hash_themes_show_elegant_icon', true)) {
-                                            echo '<ul class="hash-themes-icon-list elegant-icon-list hash-themes-clearfix">';
-                                            $hash_themes_eleganticons_icon_array = hash_themes_eleganticons_array();
-                                            foreach ($hash_themes_eleganticons_icon_array as $hash_themes_eleganticons_icon) {
-                                                $icon_class = $new_value == $hash_themes_eleganticons_icon ? 'icon-active' : '';
-                                                echo '<li class=' . esc_attr($icon_class) . '><i class="' . esc_attr($hash_themes_eleganticons_icon) . '"></i></li>';
+                                        if ($hash_themes_icons && is_array($hash_themes_icons)) {
+                                            foreach ($hash_themes_icons as $hash_themes_icon) {
+                                                $hash_themes_icon_name = isset($hash_themes_icon['name']) ? $hash_themes_icon['name'] : '';
+                                                $hash_themes_icon_prefix = isset($hash_themes_icon['prefix']) ? $hash_themes_icon['prefix'] : '';
+                                                $hash_themes_icon_displayPrefix = isset($hash_themes_icon['displayPrefix']) ? $hash_themes_icon['displayPrefix'] . ' ' : '';
+
+                                                echo '<ul class="hash-themes-icon-list ' . esc_attr($hash_themes_icon_name) . esc_attr($hash_themes_active_class) . '">';
+                                                $hash_themes_icon_array = isset($hash_themes_icon['icons']) ? $hash_themes_icon['icons'] : '';
+                                                if (is_array($hash_themes_icon_array)) {
+                                                    foreach ($hash_themes_icon_array as $hash_themes_icon_id) {
+
+                                                        $icon_class = ($new_value == $hash_themes_icon_id) ? 'icon-active' : '';
+                                                        echo '<li class=' . esc_attr($icon_class) . '><i class="' . esc_attr($hash_themes_icon_displayPrefix) . esc_attr($hash_themes_icon_prefix) . esc_attr($hash_themes_icon_id) . '"></i></li>';
+                                                    }
+                                                }
+                                                echo '</ul>';
+                                                $active_class = '';
                                             }
-                                            echo '</ul>';
                                         }
 
                                         echo '</div>';
@@ -295,8 +297,8 @@ class Hash_Themes_Repeater_Control extends WP_Customize_Control {
 
                         <div class="hash-themes-clearfix hash-themes-repeater-footer">
                             <div class="alignright">
-                                <a class="hash-themes-repeater-field-remove" href="#remove"><?php esc_html_e('Delete', 'text-domain') ?></a> |
-                                <a class="hash-themes-repeater-field-close" href="#close"><?php esc_html_e('Close', 'text-domain') ?></a>
+                                <a class="hash-themes-repeater-field-remove" href="#remove"><?php esc_html_e('Delete', 'hash-themes') ?></a> |
+                                <a class="hash-themes-repeater-field-close" href="#close"><?php esc_html_e('Close', 'hash-themes') ?></a>
                             </div>
                         </div>
                     </div>

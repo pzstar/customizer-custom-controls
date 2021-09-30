@@ -1,5 +1,4 @@
 jQuery(document).ready(function ($) {
-
     'use strict';
 
     var delay = (function () {
@@ -10,14 +9,21 @@ jQuery(document).ready(function ($) {
         };
     })();
 
+    // Select Preloader
+    $('.hash-themes-preloader-selector').on('change', function () {
+        var activePreloader = $(this).val();
+        $(this).next('.hash-themes-preloader-container').find('.hash-themes-preloader').hide();
+        $(this).next('.hash-themes-preloader-container').find('.ht-' + activePreloader).show();
+    });
+
     // Icon Control JS
     $('body').on('click', '.hash-themes-icon-box-wrap .hash-themes-icon-list li', function () {
         var icon_class = $(this).find('i').attr('class');
         $(this).closest('.hash-themes-icon-box').find('.hash-themes-icon-list li').removeClass('icon-active');
         $(this).addClass('icon-active');
         $(this).closest('.hash-themes-icon-box').prev('.hash-themes-selected-icon').children('i').attr('class', '').addClass(icon_class);
+        $(this).closest('.hash-themes-icon-box').slideUp()
         $(this).closest('.hash-themes-icon-box').next('input').val(icon_class).trigger('change');
-        $(this).closest('.hash-themes-icon-box').slideUp();
     });
 
     $('body').on('click', '.hash-themes-icon-box-wrap .hash-themes-selected-icon', function () {
@@ -25,11 +31,12 @@ jQuery(document).ready(function ($) {
     });
 
     $('body').on('change', '.hash-themes-icon-box-wrap .hash-themes-icon-search select', function () {
-        var selected = $(this).val();
-        $(this).closest('.hash-themes-icon-box').find('.hash-themes-icon-search-input').val('');
-        $(this).closest('.hash-themes-icon-box').find('.hash-themes-icon-list li').show();
-        $(this).closest('.hash-themes-icon-box').find('.hash-themes-icon-list').hide().removeClass('active');
-        $(this).closest('.hash-themes-icon-box').find('.' + selected).fadeIn().addClass('active');
+        var $ele = $(this);
+        var selected = $ele.val();
+        $ele.parent('.hash-themes-icon-search').siblings('.hash-themes-icon-list').hide().removeClass('active');
+        $ele.parent('.hash-themes-icon-search').siblings('.' + selected).show().addClass('active');
+        $ele.closest('.hash-themes-icon-box').find('.hash-themes-icon-search-input').val('');
+        $ele.parent('.hash-themes-icon-search').siblings('.' + selected).find('li').show();
     });
 
     $('body').on('keyup', '.hash-themes-icon-box-wrap .hash-themes-icon-search input', function (e) {
@@ -45,14 +52,6 @@ jQuery(document).ready(function ($) {
                 }
             });
         }, 500);
-    });
-
-
-    // Select Preloader
-    $('.ht-preloader-selector').on('change', function () {
-        var activePreloader = $(this).val();
-        $(this).next('.ht-preloader-container').find('.ht-preloader').hide();
-        $(this).next('.ht-preloader-container').find('.ht-' + activePreloader).show();
     });
 
     // Switch Control
@@ -110,7 +109,7 @@ jQuery(document).ready(function ($) {
 
     // Range JS
     $('.customize-control-hash-themes-range-slider').each(function () {
-        var sliderValue = $(this).find('.hash-themes-slider-input').val();
+        var sliderValue = $(this).find('input').val();
         var newSlider = $(this).find('.hash-themes-range-slider');
         var sliderMinValue = parseFloat(newSlider.attr('slider-min-value'));
         var sliderMaxValue = parseFloat(newSlider.attr('slider-max-value'));
@@ -122,28 +121,28 @@ jQuery(document).ready(function ($) {
             step: sliderStepValue,
             range: 'min',
             slide: function (e, ui) {
-                $(this).parent().find('.hash-themes-slider-input').trigger('change');
+                $(this).parent().find('input').trigger('change');
             },
             change: function (e, ui) {
-                $(this).parent().find('.hash-themes-slider-input').trigger('change');
+                $(this).parent().find('input').trigger('change');
             }
         });
     });
 
     // Change the value of the input field as the slider is moved
     $('.customize-control-hash-themes-range-slider .hash-themes-range-slider').on('slide', function (event, ui) {
-        $(this).parent().find('.hash-themes-slider-input').val(ui.value);
+        $(this).parent().find('input').val(ui.value);
     });
 
     // Reset slider and input field back to the default value
     $('.customize-control-hash-themes-range-slider .hash-themes-slider-reset').on('click', function () {
         var resetValue = $(this).attr('slider-reset-value');
-        $(this).parents('.customize-control-hash-themes-range-slider').find('.hash-themes-slider-input').val(resetValue);
+        $(this).parents('.customize-control-hash-themes-range-slider').find('input').val(resetValue);
         $(this).parents('.customize-control-hash-themes-range-slider').find('.hash-themes-range-slider').slider('value', resetValue);
     });
 
     // Update slider if the input field loses focus as it's most likely changed
-    $('.customize-control-hash-themes-range-slider .hash-themes-slider-input').blur(function () {
+    $('.customize-control-hash-themes-range-slider input').blur(function () {
         var resetValue = $(this).val();
         var slider = $(this).parents('.customize-control-hash-themes-range-slider').find('.hash-themes-range-slider');
         var sliderMinValue = parseInt(slider.attr('slider-min-value'));
@@ -210,7 +209,6 @@ jQuery(document).ready(function ($) {
         $(this).closest('.hash-themes-color-tab-wrap').find('.hash-themes-color-tab-contents > div').hide();
         $(this).closest('.hash-themes-color-tab-wrap').find('.' + clicked).fadeIn();
     });
-
 
     //Gallery Control
     $('.hash-themes-gallery-button').click(function (e) {
@@ -299,7 +297,7 @@ jQuery(document).ready(function ($) {
     });
 
     // Scroll to Footer - add scroll to header as well
-    $('.customize-control-hash-themes-repeater').on('click', '#accordion-section-ms_footer_section .accordion-section-title', function (event) {
+    $('.customize-control-hash-themes-repeater').on('click', '#accordion-section-hash_themes_footer_section .accordion-section-title', function (event) {
         var preview_section_id = 'hash-themes-colophon';
         var $contents = jQuery('#customize-preview iframe').contents();
         if ($contents.find('#' + preview_section_id).length > 0) {
@@ -346,6 +344,14 @@ jQuery(document).ready(function ($) {
                         $(this).prop('checked', false);
                     }
                 });
+                field.find('.hash-themes-type-checkbox input[type="checkbox"]').each(function () {
+                    var defaultValue = $(this).attr('data-default');
+                    if ($(this).val() == defaultValue) {
+                        $(this).prop('checked', true);
+                    } else {
+                        $(this).prop('checked', false);
+                    }
+                });
                 field.find('.hash-themes-selector-labels label').each(function () {
                     var defaultValue = $(this).closest('.hash-themes-selector-labels').next('input[data-name]').attr('data-default');
                     var dataVal = $(this).attr('data-val');
@@ -356,24 +362,24 @@ jQuery(document).ready(function ($) {
                         $(this).removeClass('selector-selected');
                     }
                 });
-                field.find('.range-input').each(function () {
-                    var $dis = $(this);
-                    $dis.removeClass('ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all').empty();
-                    var defaultValue = parseFloat($dis.attr('data-defaultvalue'));
-                    $dis.siblings('.range-input-selector').val(defaultValue);
-                    $dis.slider({
+                field.find('.hash-themes-range-slider-control-wrap').each(function () {
+                    var $slider = $(this).find('.hash-themes-range-slider');
+                    $slider.removeClass('ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all').empty();
+                    var defaultValue = parseFloat($slider.attr('data-default'));
+                    $(this).find('input').val(defaultValue);
+                    $slider.slider({
                         range: 'min',
-                        value: parseFloat($dis.attr('data-defaultvalue')),
-                        min: parseFloat($dis.attr('data-min')),
-                        max: parseFloat($dis.attr('data-max')),
-                        step: parseFloat($dis.attr('data-step')),
+                        value: parseFloat($slider.attr('data-default')),
+                        min: parseFloat($slider.attr('data-min')),
+                        max: parseFloat($slider.attr('data-max')),
+                        step: parseFloat($slider.attr('data-step')),
                         slide: function (event, ui) {
-                            $dis.siblings('.range-input-selector').val(ui.value);
-                            ms_refresh_repeater_values();
+                            $slider.closest('.hash-themes-range-slider-control-wrap').find('input[data-name]').val(ui.value);
+                            hash_themes_refresh_repeater_values();
                         }
                     });
                 });
-                field.find('.hash-themes-switch').each(function () {
+                field.find('.hash-themes-onoffswitch').each(function () {
                     var defaultValue = $(this).next('input[data-name]').attr('data-default');
                     $(this).next('input[data-name]').val(defaultValue);
                     if (defaultValue == 'on') {
@@ -398,7 +404,7 @@ jQuery(document).ready(function ($) {
                     $(this).wpColorPicker({
                         change: function (event, ui) {
                             setTimeout(function () {
-                                ms_refresh_repeater_values();
+                                hash_themes_refresh_repeater_values();
                             }, 100);
                         }
                     });
@@ -412,7 +418,7 @@ jQuery(document).ready(function ($) {
                         $(this).find('.thumbnail-image').html('').prev('.placeholder').removeClass('hidden');
                     }
                 });
-                field.find('.hash-themes-icon-list').each(function () {
+                field.find('.hash-themes-icon-box').each(function () {
                     var defaultValue = $(this).next('input[data-name]').attr('data-default');
                     $(this).next('input[data-name]').val(defaultValue);
                     $(this).prev('.hash-themes-selected-icon').children('i').attr('class', '').addClass(defaultValue);
@@ -442,7 +448,7 @@ jQuery(document).ready(function ($) {
                 $('.accordion-section-content').animate({
                     scrollTop: $this.height()
                 }, 1000);
-                ms_refresh_repeater_values();
+                hash_themes_refresh_repeater_values();
             }
         }
         return false;
@@ -452,7 +458,7 @@ jQuery(document).ready(function ($) {
         if (typeof $(this).parent() != 'undefined') {
             $(this).closest('.hash-themes-repeater-field-control').slideUp('normal', function () {
                 $(this).remove();
-                ms_refresh_repeater_values();
+                hash_themes_refresh_repeater_values();
             });
         }
         return false;
@@ -460,7 +466,7 @@ jQuery(document).ready(function ($) {
 
     $('.customize-control-hash-themes-repeater').on('keyup change', '[data-name]', function () {
         delay(function () {
-            ms_refresh_repeater_values();
+            hash_themes_refresh_repeater_values();
             return false;
         }, 500);
     });
@@ -481,7 +487,7 @@ jQuery(document).ready(function ($) {
         orientation: 'vertical',
         handle: '.hash-themes-repeater-field-title',
         update: function (event, ui) {
-            ms_refresh_repeater_values();
+            hash_themes_refresh_repeater_values();
         }
     });
 
@@ -531,7 +537,7 @@ jQuery(document).ready(function ($) {
     var ColorChange = false;
     $('.customize-control-hash-themes-repeater .hash-themes-color-picker').wpColorPicker({
         change: function (event, ui) {
-            ms_refresh_repeater_values();
+            hash_themes_refresh_repeater_values();
         }
     });
     ColorChange = true;
@@ -542,25 +548,25 @@ jQuery(document).ready(function ($) {
             return $(this).val();
         }).get().join(',');
         $(this).parents('.hash-themes-type-multicategory').find('input[type="hidden"]').val(checkbox_values).trigger('change');
-        ms_refresh_repeater_values();
+        hash_themes_refresh_repeater_values();
     });
 
-    $('.hash-themes-repeater-fields .range-input').each(function () {
-        var $dis = $(this);
-        $dis.slider({
+    $('.hash-themes-type-range').each(function () {
+        var $slider = $(this).find('.hash-themes-range-slider');
+        $slider.slider({
             range: 'min',
-            value: parseFloat($dis.attr('data-value')),
-            min: parseFloat($dis.attr('data-min')),
-            max: parseFloat($dis.attr('data-max')),
-            step: parseFloat($dis.attr('data-step')),
+            value: parseFloat($slider.attr('data-value')),
+            min: parseFloat($slider.attr('data-min')),
+            max: parseFloat($slider.attr('data-max')),
+            step: parseFloat($slider.attr('data-step')),
             slide: function (event, ui) {
-                $dis.siblings('.range-input-selector').val(ui.value);
-                ms_refresh_repeater_values();
+                $slider.closest('.hash-themes-range-slider-control-wrap').find('input').val(ui.value);
+                hash_themes_refresh_repeater_values();
             }
         });
     });
 
-    function ms_refresh_repeater_values() {
+    function hash_themes_refresh_repeater_values() {
         $('.control-section.open .hash-themes-repeater-field-control-wrap').each(function () {
             var values = [];
             var $this = $(this);
@@ -582,7 +588,7 @@ jQuery(document).ready(function ($) {
     }
 });
 
-function ms_set_bg_color_value($container, $element, $obj) {
+function hash_themes_set_bg_color_value($container, $element, $obj) {
     $container.find($element).wpColorPicker({
         change: function (event, ui) {
             var color = ui.color.to_s();
@@ -649,14 +655,14 @@ function ms_set_bg_color_value($container, $element, $obj) {
             control.container.on('change', '.background-image-size select', function () {
                 control.settings['size'].set(jQuery(this).val());
             });
-            control.container.on('change', '.background-image-attach select', function () {
-                control.settings['attach'].set(jQuery(this).val());
+            control.container.on('change', '.background-image-attachment select', function () {
+                control.settings['attachment'].set(jQuery(this).val());
             });
             control.container.on('change', '.background-image-position select', function () {
                 control.settings['position'].set(jQuery(this).val());
             });
-            ms_set_bg_color_value(control.container, '.background-image-color input', control.settings['color']);
-            ms_set_bg_color_value(control.container, '.background-image-overlay input', control.settings['overlay']);
+            hash_themes_set_bg_color_value(control.container, '.background-image-color input', control.settings['color']);
+            hash_themes_set_bg_color_value(control.container, '.background-image-overlay input', control.settings['overlay']);
         }
     });
 
@@ -766,7 +772,7 @@ function ms_set_bg_color_value($container, $element, $obj) {
     });
 
     // Dimenstion Control
-    api.controlConstructor['dimensions'] = wp.customize.Control.extend({
+    api.controlConstructor['dimensions'] = api.Control.extend({
         ready: function () {
             var control = this;
             control.container.on('change keyup paste', '.hash-themes-dimension-desktop_top', function () {
@@ -809,7 +815,7 @@ function ms_set_bg_color_value($container, $element, $obj) {
     });
 
     // Range Slider Control
-    api.controlConstructor['hash-themes-responsive-range-slider'] = wp.customize.Control.extend({
+    api.controlConstructor['hash-themes-responsive-range-slider'] = api.Control.extend({
         ready: function () {
             var control = this,
                     desktop_slider = control.container.find('.hash-themes-res-range-slider.desktop-slider'),
@@ -896,7 +902,7 @@ function ms_set_bg_color_value($container, $element, $obj) {
     });
 
     // Sortable Control
-    api.controlConstructor['hash-themes-sortable'] = wp.customize.Control.extend({
+    api.controlConstructor['hash-themes-sortable'] = api.Control.extend({
         ready: function () {
             var control = this;
             // Set the sortable container.

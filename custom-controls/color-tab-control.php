@@ -133,8 +133,8 @@ class Hash_Themes_Color_Tab_Control extends WP_Customize_Control {
      */
     protected function l10n($id = false) {
         $translation_strings = array(
-            'normal' => esc_attr__('Normal', 'text-domain'),
-            'hover' => esc_attr__('Hover', 'text-domain')
+            'normal' => esc_attr__('Normal', 'hash-themes'),
+            'hover' => esc_attr__('Hover', 'hash-themes')
         );
         if (false === $id) {
             return $translation_strings;

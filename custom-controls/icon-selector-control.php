@@ -4,56 +4,82 @@
 class Hash_Themes_Icon_Selector_Control extends WP_Customize_Control {
 
     public $type = 'hash-themes-icon-selector';
-    public $icon_array = array();
+    //See customizer-fonts-iucon.php file
+    public $icon_array;
 
     public function __construct($manager, $id, $args = array()) {
-        if (isset($args['icon_array'])) {
-            $this->icon_array = $args['icon_array'];
-        }
+        $this->icon_array = apply_filter('hash_themes_register_icon', array());
         parent::__construct($manager, $id, $args);
     }
 
-    public function render_content() {
+    public function to_json() {
+        parent::to_json();
+        $this->json['filter_text'] = esc_attr__('Type to filter', 'hash-themes');
+        $this->json['value'] = $this->value();
+        $this->json['link'] = $this->get_link();
+        $this->json['icon_array'] = wp_parse_args($this->icon_array, array(
+            'name' => '',
+            'label' => '',
+            'prefix' => '',
+            'displayPrefix' => '',
+            'url' => '',
+            'icons' => array()
+        ));
+    }
+
+    public function content_template() {
         ?>
         <label>
+            <# if ( data.label ) { #>
             <span class="customize-control-title">
-                <?php echo esc_html($this->label); ?>
+                {{{ data.label }}}
             </span>
+            <# } #>
 
-            <?php if ($this->description) { ?>
-                <span class="description customize-control-description">
-                    <?php echo wp_kses_post($this->description); ?>
-                </span>
-            <?php } ?>
+            <# if ( data.description ) { #>
+            <span class="description customize-control-description">
+                {{{ data.description }}}
+            </span>
+            <# } #>
+
 
             <div class="hash-themes-icon-box-wrap">
                 <div class="hash-themes-selected-icon">
-                    <i class="<?php echo esc_attr($this->value()); ?>"></i>
-                    <span><i class="icofont-simple-down"></i></span>
+                    <i class="{{ data.value }}"></i>
+                    <span><i class="hash-themes-down-icon"></i></span>
                 </div>
-
                 <div class="hash-themes-icon-box">
                     <div class="hash-themes-icon-search">
-                        <input type="text" class="hash-themes-icon-search-input" placeholder="<?php echo esc_attr__('Type to filter', 'text-domain'); ?>" />
+
+                        <select>
+                            <# if ( data.icon_array ) { #>
+                            <# _.each( data.icon_array, function( val ) { #>
+                            <#  if (val[name] && val[label]) { #>
+                            <option value="{{val[name]}}">{{val[label]}}</option>
+                            <# } #>
+                            <# } ) #>
+                            <# } #>
+                        </select>
+
+                        <input type="text" class="hash-themes-icon-search-input" placeholder="{{ data.filter_text }}" />
                     </div>
 
-                    <ul class="hash-themes-icon-list hash-themes-clearfix active">
-                        <?php
-                        if (isset($this->icon_array) && !empty($this->icon_array)) {
-                            $icon_array = $this->icon_array;
-                        } else {
-                            $icon_array = hash_themes_materialdesignicons_array();
-                        }
-
-                        foreach ($icon_array as $icon) {
-                            $icon_class = $this->value() == $icon ? 'icon-active' : '';
-                            echo '<li class=' . esc_attr($icon_class) . '><i class="' . esc_attr($icon) . '"></i></li>';
-                        }
-                        ?>
+                    <# if ( data.icon_array ) { #>
+                    <# _.each( data.icon_array, function( val ) { #>
+                    <ul class="hash-themes-icon-list {{val[name]}}">
+                        <# if (_.isArray(val[icons])) { #>
+                        <# _.each( val[icons], function( icon ) { #>
+                        <li class='<# if ( icon === data.value ) { #> icon-active <# } #>'><i class="{{val[displayPrefix]}} {{val[prefix]}} {{icon}}"></i></li>
+                        <# } #>
+                        <# } #>
                     </ul>
+                    <# } ) #>
+                    <# } #>
+
                 </div>
-                <input type="hidden" value="<?php esc_attr($this->value()); ?>" <?php $this->link(); ?> />
+                <input type="hidden" value="{{ data.value }}" {{{ data.link }}} />
             </div>
+        </div>
         </label>
         <?php
     }

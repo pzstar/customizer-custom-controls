@@ -7,6 +7,7 @@ class Hash_Themes_Preloader_Selector_Control extends WP_Customize_Control {
 
     public function __construct($manager, $id, $args = array(), $choices = array()) {
         $this->choices = $args['choices'];
+        $this->file_path = $args['file_path'];
         parent::__construct($manager, $id, $args);
     }
 
@@ -24,7 +25,7 @@ class Hash_Themes_Preloader_Selector_Control extends WP_Customize_Control {
                     </span>
                 <?php } ?>
 
-                <select class="ht-preloader-selector" <?php $this->link(); ?>>
+                <select class="hash-themes-preloader-selector" <?php $this->link(); ?>>
                     <?php
                     foreach ($this->choices as $key => $choice) {
                         printf('<option value="%1$s" %2$s>%3$s</option>', esc_attr($key), selected($this->value(), $key, false), esc_html($choice));
@@ -32,12 +33,15 @@ class Hash_Themes_Preloader_Selector_Control extends WP_Customize_Control {
                     ?>
                 </select>
 
-                <div class="ht-preloader-container">
+                <div class="hash-themes-preloader-container">
                     <?php
-                    for ($i = 1; $i <= 15; $i++) {
+                    for ($i = 1; $i <= 16; $i++) {
                         $style = ($this->value() != 'preloader' . $i) ? 'style="display:none"' : '';
-                        echo '<div class="ht-preloader ht-preloader' . $i . '"' . $style . '>';
-                        require_once get_template_directory() . '/inc/preloader/preloader' . $i . '.php';
+                        echo '<div class="hash-themes-preloader hash-themes-preloader' . $i . '"' . $style . '>';
+                        $preloader_path = trailingslashit($this->file_path) . 'preloader' . $i . '.php';
+                        if (file_exists($preloader_path)) {
+                            require_once $preloader_path;
+                        }
                         echo '</div>';
                     }
                     ?>

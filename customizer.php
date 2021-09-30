@@ -7,5 +7,5 @@ require HASH_THEMES_CUSTOMIZER_PATH . 'customizer-custom-controls.php';
 require HASH_THEMES_CUSTOMIZER_PATH . 'custom-controls/typography/typography.php';
 require HASH_THEMES_CUSTOMIZER_PATH . 'customizer-control-sanitization.php';
 require HASH_THEMES_CUSTOMIZER_PATH . 'customizer-functions.php';
-require HASH_THEMES_CUSTOMIZER_PATH . 'customizer-fonts-icons.php';
+require HASH_THEMES_CUSTOMIZER_PATH . 'customizer-icon-manager.php';
 require HASH_THEMES_CUSTOMIZER_PATH . 'customizer-panel/register-customizer-controls.php';

@@ -29,6 +29,7 @@ if (class_exists('WP_Customize_Section')) {
          * @var    string
          */
         public $pro_url = '';
+        public $options = array();
 
         /**
          * Add custom parameters to pass to the JS via JSON.
@@ -42,6 +43,7 @@ if (class_exists('WP_Customize_Section')) {
 
             $json['pro_text'] = $this->pro_text;
             $json['pro_url'] = $this->pro_url;
+            $json['options'] = $this->options;
 
             return $json;
         }
@@ -57,7 +59,7 @@ if (class_exists('WP_Customize_Section')) {
             ?>
 
             <li id="accordion-section-{{ data.id }}" class="accordion-section control-section control-section-{{ data.type }} cannot-expand">
-
+                <# if ( _.isEmpty(data.options) ) { #>
                 <h3 class="accordion-section-title">
                     <# if ( data.title ) { #>
                     {{ data.title }}
@@ -66,6 +68,22 @@ if (class_exists('WP_Customize_Section')) {
                     <a href="{{ data.pro_url }}" class="button button-primary" target="_blank">{{ data.pro_text }}</a>
                     <# } #>
                 </h3>
+                <# }else{ #>
+                <label>
+                    <# if ( data.title ) { #>
+                    {{ data.title }}
+                    <# } #>
+                </label>
+                <# if ( data.text ) { #>
+                {{ data.text }}
+                <# } #>
+
+                <# _.each( data.options, function(key, value) { #>
+                {{ key }}<br/>
+                <# }) #>
+
+                <a href="<?php echo esc_url('https://hashthemes.com/wordpress-theme/total/?utm_source=wordpress&utm_medium=hash-themes-link&utm_campaign=hash-themes-upgrade'); ?>" class="button button-primary" target="_blank"><?php echo esc_html__('Upgrade to Pro', 'hash-themes'); ?></a>
+                <# } #>
             </li>
             <?php
         }
