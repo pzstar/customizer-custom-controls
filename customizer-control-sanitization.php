@@ -41,16 +41,16 @@ function hash_themes_sanitize_choices_array($input, $setting) {
     return $input;
 }
 
-function hash_themes_sanitize_color_alpha($hash_themes_color) {
-    $hash_themes_color = str_replace('#', '', $hash_themes_color);
-    if ('' === $hash_themes_color) {
+function hash_themes_sanitize_color_alpha($color) {
+    $color = str_replace('#', '', $color);
+    if ('' === $color) {
         return '';
     }
 
     // 3 or 6 hex digits, or the empty string.
-    if (preg_match('|^#([A-Fa-f0-9]{3}){1,2}$|', '#' . $hash_themes_color)) {
+    if (preg_match('|^#([A-Fa-f0-9]{3}){1,2}$|', '#' . $color)) {
         // convert to rgb
-        $colour = $hash_themes_color;
+        $colour = $color;
         if (strlen($colour) == 6) {
             list( $r, $g, $b ) = array($colour[0] . $colour[1], $colour[2] . $colour[3], $colour[4] . $colour[5]);
         } elseif (strlen($colour) == 3) {
@@ -64,7 +64,7 @@ function hash_themes_sanitize_color_alpha($hash_themes_color) {
         return 'rgba(' . join(',', array('r' => $r, 'g' => $g, 'b' => $b, 'a' => 1)) . ')';
     }
 
-    return strpos(trim($hash_themes_color), 'rgb') !== false ? $hash_themes_color : false;
+    return strpos(trim($color), 'rgb') !== false ? $color : false;
 }
 
 /**

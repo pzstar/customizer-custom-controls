@@ -9,7 +9,6 @@
     clear: both;
 }
 
-.initial-customizer-hidden,
 .customizer-hidden {
     visibility: hidden;
     opacity: 0;
@@ -1411,7 +1410,6 @@
 }
 
 /*Upgrade Text*/
-.ht-white-box,
 .customize-control-hash-themes-upgrade-info{
     background: #FFFFFF;
     box-sizing: border-box;

@@ -13,7 +13,7 @@ jQuery(document).ready(function ($) {
     $('.hash-themes-preloader-selector').on('change', function () {
         var activePreloader = $(this).val();
         $(this).next('.hash-themes-preloader-container').find('.hash-themes-preloader').hide();
-        $(this).next('.hash-themes-preloader-container').find('.ht-' + activePreloader).show();
+        $(this).next('.hash-themes-preloader-container').find('.hash-themes-' + activePreloader).show();
     });
 
     // Icon Control JS

@@ -35,10 +35,10 @@ class Hash_Themes_Preloader_Selector_Control extends WP_Customize_Control {
 
                 <div class="hash-themes-preloader-container">
                     <?php
-                    for ($i = 1; $i <= 16; $i++) {
-                        $style = ($this->value() != 'preloader' . $i) ? 'style="display:none"' : '';
-                        echo '<div class="hash-themes-preloader hash-themes-preloader' . $i . '"' . $style . '>';
-                        $preloader_path = trailingslashit($this->file_path) . 'preloader' . $i . '.php';
+                    foreach ($this->choices as $key => $choice) {
+                        $style = ($this->value() != $key) ? 'style="display:none"' : '';
+                        echo '<div class="hash-themes-preloader hash-themes-' . $key . '" ' . $style . '>';
+                        $preloader_path = trailingslashit($this->file_path) . $key . '.php';
                         if (file_exists($preloader_path)) {
                             require_once $preloader_path;
                         }
