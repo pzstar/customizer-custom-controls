@@ -8,7 +8,7 @@ class Hash_Themes_Icon_Selector_Control extends WP_Customize_Control {
     public $icon_array;
 
     public function __construct($manager, $id, $args = array()) {
-        $this->icon_array = apply_filter('hash_themes_register_icon', array());
+        $this->icon_array = apply_filters('hash_themes_register_icon', array());
         parent::__construct($manager, $id, $args);
     }
 

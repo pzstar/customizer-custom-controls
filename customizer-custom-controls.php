@@ -8,7 +8,7 @@ if (!class_exists('Hash_Themes_Customizer_Custom_Controls')) {
 
         function __construct() {
             if (defined('HASH_THEMES_VER')) {
-                $this->version = HASH_THEMES_VER;
+                $this->version = HASH_THEMES_VERSION;
             } else {
                 $this->version = '1.0.0';
             }
@@ -67,14 +67,25 @@ if (!class_exists('Hash_Themes_Customizer_Custom_Controls')) {
         }
 
         public function enqueue_customizer_script() {
+            //See customizer-fonts-iucon.php file
+            $hash_themes_icons = apply_filters('hash_themes_register_icon', array());
+
+            if ($hash_themes_icons && is_array($hash_themes_icons)) {
+                foreach ($hash_themes_icons as $hash_themes_icon) {
+                    if (isset($hash_themes_icon['name']) && isset($hash_themes_icon['url'])) {
+                        wp_enqueue_style($hash_themes_icon['name'], $hash_themes_icon['url'], array(), $this->get_version());
+                    }
+                }
+            }
+
             wp_enqueue_script('selectize', HASH_THEMES_CUSTOMIZER_URL . 'custom-controls/assets/js/selectize.js', array('jquery'), $this->get_version(), true);
             wp_enqueue_script('chosen-jquery', HASH_THEMES_CUSTOMIZER_URL . 'custom-controls/assets/js/chosen.jquery.js', array('jquery'), $this->get_version(), true);
             wp_enqueue_script('wp-color-picker-alpha', HASH_THEMES_CUSTOMIZER_URL . 'custom-controls/assets/js/wp-color-picker-alpha.js', array('jquery', 'wp-color-picker'), $this->get_version(), true);
-            wp_enqueue_script('viral-mag-customizer-control', HASH_THEMES_CUSTOMIZER_URL . 'custom-controls/assets/js/customizer-controls.js', array('jquery', 'jquery-ui-datepicker'), $this->get_version(), true);
+            wp_enqueue_script('hash-themes-customizer-control', HASH_THEMES_CUSTOMIZER_URL . 'custom-controls/assets/js/customizer-controls.js', array('jquery', 'jquery-ui-datepicker'), $this->get_version(), true);
 
             wp_enqueue_style('selectize', HASH_THEMES_CUSTOMIZER_URL . 'custom-controls/assets/css/selectize.css', array(), $this->get_version());
             wp_enqueue_style('chosen', HASH_THEMES_CUSTOMIZER_URL . 'custom-controls/assets/css/chosen.css', array(), $this->get_version());
-            wp_enqueue_style('viral-mag-customizer-control', HASH_THEMES_CUSTOMIZER_URL . 'custom-controls/assets/css/customizer-controls.css', array('wp-color-picker'), $this->get_version());
+            wp_enqueue_style('hash-themes-customizer-control', HASH_THEMES_CUSTOMIZER_URL . 'custom-controls/assets/css/customizer-controls.css', array('wp-color-picker'), $this->get_version());
         }
 
         public function get_version() {

@@ -229,7 +229,7 @@ class Hash_Themes_Repeater_Control extends WP_Customize_Control {
                                         echo '<select>';
 
                                         //See customizer-fonts-iucon.php file
-                                        $hash_themes_icons = apply_filter('hash_themes_register_icon', array());
+                                        $hash_themes_icons = apply_filters('hash_themes_register_icon', array());
 
                                         if ($hash_themes_icons && is_array($hash_themes_icons)) {
                                             foreach ($hash_themes_icons as $hash_themes_icon) {
