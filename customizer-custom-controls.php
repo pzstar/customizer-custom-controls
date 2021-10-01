@@ -7,7 +7,7 @@ if (!class_exists('Hash_Themes_Customizer_Custom_Controls')) {
         protected $version;
 
         function __construct() {
-            if (defined('HASH_THEMES_VER')) {
+            if (defined('HASH_THEMES_VERSION')) {
                 $this->version = HASH_THEMES_VERSION;
             } else {
                 $this->version = '1.0.0';
