@@ -50,27 +50,26 @@ class Hash_Themes_Icon_Selector_Control extends WP_Customize_Control {
                 </div>
                 <div class="hash-themes-icon-box">
                     <div class="hash-themes-icon-search">
-
                         <select>
                             <# if ( data.icon_array ) { #>
-                            <# _.each( data.icon_array, function( val ) { #>
-                            <#  if (val[name] && val[label]) { #>
-                            <option value="{{val[name]}}">{{val[label]}}</option>
+                            <# _.each( data.icon_array, function( val ) {
+                            #>
+                            <#  if (val['name'] && val['label']) { #>
+                            <option value="{{ val['name'] }}">{{{ val['label'] }}}</option>
                             <# } #>
                             <# } ) #>
                             <# } #>
                         </select>
-
                         <input type="text" class="hash-themes-icon-search-input" placeholder="{{ data.filter_text }}" />
                     </div>
 
                     <# if ( data.icon_array ) { #>
                     <# _.each( data.icon_array, function( val ) { #>
-                    <ul class="hash-themes-icon-list {{val[name]}}">
-                        <# if (_.isArray(val[icons])) { #>
-                        <# _.each( val[icons], function( icon ) { #>
-                        <li class='<# if ( icon === data.value ) { #> icon-active <# } #>'><i class="{{val[displayPrefix]}} {{val[prefix]}} {{icon}}"></i></li>
-                        <# } #>
+                    <ul class="hash-themes-icon-list {{val['name']}}">
+                        <# if (_.isArray(val['icons'])) { #>
+                        <# _.each( val['icons'], function( icon ) { #>
+                        <li class='<# if ( icon === data.value ) { #> icon-active <# } #>'><i class="{{val['displayPrefix']}} {{val['prefix']}}{{icon}}"></i></li>
+                        <# } ) #>
                         <# } #>
                     </ul>
                     <# } ) #>
