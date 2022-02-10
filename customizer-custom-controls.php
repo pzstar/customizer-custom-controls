@@ -68,12 +68,12 @@ if (!class_exists('Hash_Themes_Customizer_Custom_Controls')) {
 
         public function enqueue_customizer_script() {
             //See customizer-fonts-iucon.php file
-            $hash_themes_icons = apply_filters('hash_themes_register_icon', array());
+            $icons = apply_filters('hash_themes_register_icon', array());
 
-            if ($hash_themes_icons && is_array($hash_themes_icons)) {
-                foreach ($hash_themes_icons as $hash_themes_icon) {
-                    if (isset($hash_themes_icon['name']) && isset($hash_themes_icon['url'])) {
-                        wp_enqueue_style($hash_themes_icon['name'], $hash_themes_icon['url'], array(), $this->get_version());
+            if ($icons && is_array($icons)) {
+                foreach ($icons as $icon) {
+                    if (isset($icon['name']) && isset($icon['url'])) {
+                        wp_enqueue_style($icon['name'], $icon['url'], array(), $this->get_version());
                     }
                 }
             }

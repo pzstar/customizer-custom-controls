@@ -40,7 +40,7 @@ jQuery(document).ready(function ($) {
             }
         });
 
-        hash_themes_update_nouislider(columnSelector, $th);
+        update_nouislider(columnSelector, $th);
     });
 
     $('.ht--add-col').on('click', function () {
@@ -48,10 +48,10 @@ jQuery(document).ready(function ($) {
         var columnSelectorAdd = $(this).closest('.customize-control-ht--column').find('.ht--column-selector')[0];
         var count = $(this).closest('.customize-control-ht--column').find('input').val().split(',').length + 1;
 
-        hash_themes_set_uislider(columnSelectorAdd, count);
+        set_uislider(columnSelectorAdd, count);
 
         if (count != 6) {
-            hash_themes_update_nouislider(columnSelectorAdd, $th.closest('.customize-control-ht--column'));
+            update_nouislider(columnSelectorAdd, $th.closest('.customize-control-ht--column'));
         }
 
         return false;
@@ -62,10 +62,10 @@ jQuery(document).ready(function ($) {
         var columnSelectorRemove = $(this).closest('.customize-control-ht--column').find('.ht--column-selector')[0];
         var count = $(this).closest('.customize-control-ht--column').find('input').val().split(',').length - 1;
 
-        hash_themes_set_uislider(columnSelectorRemove, count);
+        set_uislider(columnSelectorRemove, count);
 
         if (count != 0) {
-            hash_themes_update_nouislider(columnSelectorRemove, $th.closest('.customize-control-ht--column'));
+            update_nouislider(columnSelectorRemove, $th.closest('.customize-control-ht--column'));
         }
 
         return false;
@@ -87,7 +87,7 @@ jQuery(document).ready(function ($) {
         }
     });
 
-    function hash_themes_update_nouislider(columnSelector, $elements) {
+    function update_nouislider(columnSelector, $elements) {
         $('[data-handle]').append('<div class="noUi-width"><span class="noUi-width-left"></span><span class="noUi-width-right"></span></div>');
 
         columnSelector.noUiSlider.on('update', function (values, handle, unencoded, tap, positions, noUiSlider) {
@@ -123,7 +123,7 @@ jQuery(document).ready(function ($) {
         });
     }
 
-    function hash_themes_set_uislider(columnSelector, count) {
+    function set_uislider(columnSelector, count) {
         if (count == 0) {
             alert('Mimimum Column Count Reached');
         } else if (count == 1) {

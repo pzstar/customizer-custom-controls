@@ -48,22 +48,23 @@ class Hash_Themes_Icon_Selector_Control extends WP_Customize_Control {
                     <i class="{{ data.value }}"></i>
                     <span><i class="ht--down-icon"></i></span>
                 </div>
+
+                <# if ( data.icon_array ) { #>
                 <div class="ht--icon-box">
                     <div class="ht--icon-search">
+                        <# if ( count(data.icon_array) > 1 ) { #>
                         <select>
-                            <# if ( data.icon_array ) { #>
-                            <# _.each( data.icon_array, function( val ) {
-                            #>
+                            <# _.each( data.icon_array, function( val ) { #>
                             <#  if (val['name'] && val['label']) { #>
                             <option value="{{ val['name'] }}">{{{ val['label'] }}}</option>
                             <# } #>
                             <# } ) #>
-                            <# } #>
                         </select>
+                        <# } #>
                         <input type="text" class="ht--icon-search-input" placeholder="{{ data.filter_text }}" />
                     </div>
 
-                    <# if ( data.icon_array ) { #>
+
                     <# _.each( data.icon_array, function( val ) { #>
                     <ul class="ht--icon-list {{val['name']}}">
                         <# if (_.isArray(val['icons'])) { #>
@@ -73,9 +74,8 @@ class Hash_Themes_Icon_Selector_Control extends WP_Customize_Control {
                         <# } #>
                     </ul>
                     <# } ) #>
-                    <# } #>
-
                 </div>
+                <# } #>
                 <input type="hidden" value="{{ data.value }}" {{{ data.link }}} />
             </div>
         </div>

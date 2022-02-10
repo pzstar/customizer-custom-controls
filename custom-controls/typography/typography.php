@@ -4,8 +4,8 @@ function hash_themes_get_google_font_variants() {
 
     $font_list = array_merge(hash_themes_default_font_array(), hash_themes_standard_font_array(), hash_themes_google_font_array());
 
-    $hash_themes_font_family = isset($_REQUEST['font_family']) ? sanitize_text_field(wp_unslash($_REQUEST['font_family'])) : '';
-    $font_array = hash_themes_search_key($font_list, 'family', $hash_themes_font_family);
+    $font_family = isset($_REQUEST['font_family']) ? sanitize_text_field(wp_unslash($_REQUEST['font_family'])) : '';
+    $font_array = hash_themes_search_key($font_list, 'family', $font_family);
 
     $variants_array = $font_array['0']['variants'];
 

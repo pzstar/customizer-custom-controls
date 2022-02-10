@@ -47,7 +47,7 @@ class Hash_Themes_Repeater_Control extends WP_Customize_Control {
 
         <ul class="ht--repeater-field-control-wrap">
             <?php
-            $this->hash_themes_get_fields();
+            $this->get_fields();
             ?>
         </ul>
 
@@ -56,7 +56,7 @@ class Hash_Themes_Repeater_Control extends WP_Customize_Control {
         <?php
     }
 
-    private function hash_themes_get_fields() {
+    private function get_fields() {
         $fields = $this->fields;
         $values = json_decode($this->value());
 
@@ -231,44 +231,7 @@ class Hash_Themes_Repeater_Control extends WP_Customize_Control {
                                         echo '<i class="' . esc_attr($new_value) . '"></i>';
                                         echo '<span><i class="ht--down-icon"></i></span>';
                                         echo '</div>';
-                                        echo '<div class="ht--icon-box">';
-                                        echo '<div class="ht--icon-search">';
-                                        echo '<select>';
-
-                                        //See customizer-icon-manager.php file
-                                        $hash_theme_icons = apply_filters('hash_theme_register_icon', array());
-
-                                        if ($hash_theme_icons && is_array($hash_theme_icons)) {
-                                            foreach ($hash_theme_icons as $hash_theme_icon) {
-                                                if ($hash_theme_icon['name'] && $hash_theme_icon['label']) {
-                                                    echo '<option value="' . esc_attr($hash_theme_icon['name']) . '">' . esc_html__($hash_theme_icon['label']) . '</option>';
-                                                }
-                                            }
-                                        }
-
-                                        echo '</select>';
-                                        echo '<input type="text" class="ht--icon-search-input" placeholder="' . esc_html__('Type to filter', 'hash-themes') . '" />';
-                                        echo '</div>';
-
-                                        if ($hash_theme_icons && is_array($hash_theme_icons)) {
-                                            foreach ($hash_theme_icons as $hash_theme_icon) {
-                                                $hash_theme_icon_name = isset($hash_theme_icon['name']) && $hash_theme_icon['name'] ? $hash_theme_icon['name'] : '';
-                                                $hash_theme_icon_prefix = isset($hash_theme_icon['prefix']) && $hash_theme_icon['prefix'] ? $hash_theme_icon['prefix'] : '';
-                                                $hash_theme_icon_displayPrefix = isset($hash_theme_icon['displayPrefix']) && $hash_theme_icon['displayPrefix'] ? $hash_theme_icon['displayPrefix'] . ' ' : '';
-
-                                                echo '<ul class="ht--icon-list ' . esc_attr($hash_theme_icon_name) . '">';
-                                                $hash_theme_icon_array = isset($hash_theme_icon['icons']) ? $hash_theme_icon['icons'] : '';
-                                                if (is_array($hash_theme_icon_array)) {
-                                                    foreach ($hash_theme_icon_array as $hash_theme_icon_id) {
-                                                        $icon_class = ($new_value == $hash_theme_icon_id) ? 'icon-active' : '';
-                                                        echo '<li class=' . esc_attr($icon_class) . '><i class="' . esc_attr($hash_theme_icon_displayPrefix) . esc_attr($hash_theme_icon_prefix) . esc_attr($hash_theme_icon_id) . '"></i></li>';
-                                                    }
-                                                }
-                                                echo '</ul>';
-                                            }
-                                        }
-
-                                        echo '</div>';
+                                        /* Adds Icons by Javascript. See customizer-functions.php */
                                         echo '<input data-default="' . esc_attr($default) . '" type="hidden" value="' . esc_attr($new_value) . '" data-name="' . esc_attr($key) . '"/>';
                                         echo '</div>';
                                         break;

@@ -27,6 +27,11 @@ jQuery(document).ready(function ($) {
     });
 
     $('body').on('click', '.ht--icon-box-wrap .ht--selected-icon', function () {
+        if (!$(this).next().is('.ht--icon-box')) {
+            var iconbox = $('#ht--icon-box').clone();
+            iconbox.removeAttr('id');
+            iconbox.insertAfter($(this));
+        }
         $(this).next().slideToggle();
     });
 
@@ -297,7 +302,7 @@ jQuery(document).ready(function ($) {
     });
 
     // Scroll to Footer - add scroll to header as well
-    $('.customize-control-ht--repeater').on('click', '#accordion-section-hash_themes_footer_section .accordion-section-title', function (event) {
+    $('.customize-control-ht--repeater').on('click', '#accordion-section-footer_section .accordion-section-title', function (event) {
         var preview_section_id = 'ht--colophon';
         var $contents = jQuery('#customize-preview iframe').contents();
         if ($contents.find('#' + preview_section_id).length > 0) {
@@ -375,7 +380,7 @@ jQuery(document).ready(function ($) {
                         step: parseFloat($slider.attr('data-step')),
                         slide: function (event, ui) {
                             $slider.closest('.ht--range-slider-control-wrap').find('input[data-name]').val(ui.value);
-                            hash_themes_refresh_repeater_values();
+                            refresh_repeater_values();
                         }
                     });
                 });
@@ -398,13 +403,13 @@ jQuery(document).ready(function ($) {
                     }
                 });
                 field.find('.ht--color-picker').each(function () {
-                    $hash_themes_colorPicker = $(this);
-                    $hash_themes_colorPicker.closest('.wp-picker-container').after($(this));
-                    $hash_themes_colorPicker.prev('.wp-picker-container').remove();
+                    $colorPicker = $(this);
+                    $colorPicker.closest('.wp-picker-container').after($(this));
+                    $colorPicker.prev('.wp-picker-container').remove();
                     $(this).wpColorPicker({
                         change: function (event, ui) {
                             setTimeout(function () {
-                                hash_themes_refresh_repeater_values();
+                                refresh_repeater_values();
                             }, 100);
                         }
                     });
@@ -448,7 +453,7 @@ jQuery(document).ready(function ($) {
                 $('.accordion-section-content').animate({
                     scrollTop: $this.height()
                 }, 1000);
-                hash_themes_refresh_repeater_values();
+                refresh_repeater_values();
             }
         }
         return false;
@@ -458,7 +463,7 @@ jQuery(document).ready(function ($) {
         if (typeof $(this).parent() != 'undefined') {
             $(this).closest('.ht--repeater-field-control').slideUp('normal', function () {
                 $(this).remove();
-                hash_themes_refresh_repeater_values();
+                refresh_repeater_values();
             });
         }
         return false;
@@ -466,7 +471,7 @@ jQuery(document).ready(function ($) {
 
     $('.customize-control-ht--repeater').on('keyup change', '[data-name]', function () {
         delay(function () {
-            hash_themes_refresh_repeater_values();
+            refresh_repeater_values();
             return false;
         }, 500);
     });
@@ -487,7 +492,7 @@ jQuery(document).ready(function ($) {
         orientation: 'vertical',
         handle: '.ht--repeater-field-title',
         update: function (event, ui) {
-            hash_themes_refresh_repeater_values();
+            refresh_repeater_values();
         }
     });
 
@@ -537,7 +542,7 @@ jQuery(document).ready(function ($) {
     var ColorChange = false;
     $('.customize-control-ht--repeater .ht--color-picker').wpColorPicker({
         change: function (event, ui) {
-            hash_themes_refresh_repeater_values();
+            refresh_repeater_values();
         }
     });
     ColorChange = true;
@@ -548,7 +553,7 @@ jQuery(document).ready(function ($) {
             return $(this).val();
         }).get().join(',');
         $(this).parents('.ht--type-multicategory').find('input[type="hidden"]').val(checkbox_values).trigger('change');
-        hash_themes_refresh_repeater_values();
+        refresh_repeater_values();
     });
 
     $('.ht--type-range').each(function () {
@@ -561,12 +566,12 @@ jQuery(document).ready(function ($) {
             step: parseFloat($slider.attr('data-step')),
             slide: function (event, ui) {
                 $slider.closest('.ht--range-slider-control-wrap').find('input').val(ui.value);
-                hash_themes_refresh_repeater_values();
+                refresh_repeater_values();
             }
         });
     });
 
-    function hash_themes_refresh_repeater_values() {
+    function refresh_repeater_values() {
         $('.control-section.open .ht--repeater-field-control-wrap').each(function () {
             var values = [];
             var $this = $(this);
@@ -586,6 +591,89 @@ jQuery(document).ready(function ($) {
             $this.next('.ht--repeater-collector').val(JSON.stringify(values)).trigger('change');
         });
     }
+
+    // Responsive switchers
+    $('.customize-control .responsive-switchers button').on('click', function (event) {
+        // Set up variables
+        var $this = $(this),
+                $devices = $('.responsive-switchers'),
+                $device = $(event.currentTarget).data('device'),
+                $control = $('.customize-control.has-switchers'),
+                $body = $('.wp-full-overlay'),
+                $footer_devices = $('.wp-full-overlay-footer .devices');
+        // Button class
+        $devices.find('button').removeClass('active');
+        $devices.find('button.preview-' + $device).addClass('active');
+        // Control class
+        $control.find('.control-wrap').removeClass('active');
+        $control.find('.control-wrap.' + $device).addClass('active');
+        $control.removeClass('control-device-desktop control-device-tablet control-device-mobile').addClass('control-device-' + $device);
+        // Wrapper class
+        $body.removeClass('preview-desktop preview-tablet preview-mobile').addClass('preview-' + $device);
+        // Panel footer buttons
+        $footer_devices.find('button').removeClass('active').attr('aria-pressed', false);
+        $footer_devices.find('button.preview-' + $device).addClass('active').attr('aria-pressed', true);
+        // Open switchers
+        if ($this.hasClass('preview-desktop')) {
+            $control.toggleClass('responsive-switchers-open');
+        }
+    });
+    // If panel footer buttons clicked
+    $('.wp-full-overlay-footer .devices button').on('click', function (event) {
+        // Set up variables
+        var $this = $(this),
+                $devices = $('.customize-control.has-switchers .responsive-switchers'),
+                $device = $(event.currentTarget).data('device'),
+                $control = $('.customize-control.has-switchers');
+        // Button class
+        $devices.find('button').removeClass('active');
+        $devices.find('button.preview-' + $device).addClass('active');
+        // Control class
+        $control.find('.control-wrap').removeClass('active');
+        $control.find('.control-wrap.' + $device).addClass('active');
+        $control.removeClass('control-device-desktop control-device-tablet control-device-mobile').addClass('control-device-' + $device);
+        // Open switchers
+        if (!$this.hasClass('preview-desktop')) {
+            $control.addClass('responsive-switchers-open');
+        } else {
+            $control.removeClass('responsive-switchers-open');
+        }
+    });
+    // Linked button
+    $('.ht--linked').on('click', function () {
+        // Set up variables
+        var $this = $(this);
+        // Remove linked class
+        $this.parent().parent('.ht--dimension-wrap').prevAll().slice(0, 4).find('input').removeClass('linked').attr('data-element', '');
+        // Remove class
+        $this.parent('.ht--link-dimensions').removeClass('unlinked');
+    });
+    // Unlinked button
+    $('.ht--unlinked').on('click', function () {
+        // Set up variables
+        var $this = $(this),
+                $element = $this.data('element');
+        // Add linked class
+        $this.parent().parent('.ht--dimension-wrap').prevAll().slice(0, 4).find('input').addClass('linked').attr('data-element', $element);
+        // Add class
+        $this.parent('.ht--link-dimensions').addClass('unlinked');
+    });
+    // Values linked inputs
+    $('.ht--dimension-wrap').on('input', '.linked', function () {
+        var $data = $(this).attr('data-element'),
+                $val = $(this).val();
+        $('.linked[ data-element="' + $data + '" ]').each(function (key, value) {
+            $(this).val($val).change();
+        });
+    });
+
+
+    // Select Preloader
+    $('.ht--preloader-selector').on('change', function () {
+        var activePreloader = $(this).val();
+        $(this).next('.ht--preloader-container').find('.ht--preloader').hide();
+        $(this).next('.ht--preloader-container').find('.ht--' + activePreloader).show();
+    });
 });
 
 function hash_themes_set_bg_color_value($container, $element, $obj) {
@@ -695,9 +783,11 @@ function hash_themes_set_bg_color_value($container, $element, $obj) {
             });
         }
     });
+
     jQuery.extend(api.controlConstructor, {
         'ht--tab': api.Tab
     });
+
     api.bind('ready', function () {
         _.each(api.Tabs, function (id) {
             var control = api.control(id);
@@ -950,91 +1040,5 @@ function hash_themes_set_bg_color_value($container, $element, $obj) {
     });
 })(wp.customize);
 
-
-jQuery(document).ready(function ($) {
-    // Responsive switchers
-    $('.customize-control .responsive-switchers button').on('click', function (event) {
-        // Set up variables
-        var $this = $(this),
-                $devices = $('.responsive-switchers'),
-                $device = $(event.currentTarget).data('device'),
-                $control = $('.customize-control.has-switchers'),
-                $body = $('.wp-full-overlay'),
-                $footer_devices = $('.wp-full-overlay-footer .devices');
-        // Button class
-        $devices.find('button').removeClass('active');
-        $devices.find('button.preview-' + $device).addClass('active');
-        // Control class
-        $control.find('.control-wrap').removeClass('active');
-        $control.find('.control-wrap.' + $device).addClass('active');
-        $control.removeClass('control-device-desktop control-device-tablet control-device-mobile').addClass('control-device-' + $device);
-        // Wrapper class
-        $body.removeClass('preview-desktop preview-tablet preview-mobile').addClass('preview-' + $device);
-        // Panel footer buttons
-        $footer_devices.find('button').removeClass('active').attr('aria-pressed', false);
-        $footer_devices.find('button.preview-' + $device).addClass('active').attr('aria-pressed', true);
-        // Open switchers
-        if ($this.hasClass('preview-desktop')) {
-            $control.toggleClass('responsive-switchers-open');
-        }
-    });
-    // If panel footer buttons clicked
-    $('.wp-full-overlay-footer .devices button').on('click', function (event) {
-        // Set up variables
-        var $this = $(this),
-                $devices = $('.customize-control.has-switchers .responsive-switchers'),
-                $device = $(event.currentTarget).data('device'),
-                $control = $('.customize-control.has-switchers');
-        // Button class
-        $devices.find('button').removeClass('active');
-        $devices.find('button.preview-' + $device).addClass('active');
-        // Control class
-        $control.find('.control-wrap').removeClass('active');
-        $control.find('.control-wrap.' + $device).addClass('active');
-        $control.removeClass('control-device-desktop control-device-tablet control-device-mobile').addClass('control-device-' + $device);
-        // Open switchers
-        if (!$this.hasClass('preview-desktop')) {
-            $control.addClass('responsive-switchers-open');
-        } else {
-            $control.removeClass('responsive-switchers-open');
-        }
-    });
-    // Linked button
-    $('.ht--linked').on('click', function () {
-        // Set up variables
-        var $this = $(this);
-        // Remove linked class
-        $this.parent().parent('.ht--dimension-wrap').prevAll().slice(0, 4).find('input').removeClass('linked').attr('data-element', '');
-        // Remove class
-        $this.parent('.ht--link-dimensions').removeClass('unlinked');
-    });
-    // Unlinked button
-    $('.ht--unlinked').on('click', function () {
-        // Set up variables
-        var $this = $(this),
-                $element = $this.data('element');
-        // Add linked class
-        $this.parent().parent('.ht--dimension-wrap').prevAll().slice(0, 4).find('input').addClass('linked').attr('data-element', $element);
-        // Add class
-        $this.parent('.ht--link-dimensions').addClass('unlinked');
-    });
-    // Values linked inputs
-    $('.ht--dimension-wrap').on('input', '.linked', function () {
-        var $data = $(this).attr('data-element'),
-                $val = $(this).val();
-        $('.linked[ data-element="' + $data + '" ]').each(function (key, value) {
-            $(this).val($val).change();
-        });
-    });
-
-
-    // Select Preloader
-    $('.ht--preloader-selector').on('change', function () {
-        var activePreloader = $(this).val();
-        $(this).next('.ht--preloader-container').find('.ht--preloader').hide();
-        $(this).next('.ht--preloader-container').find('.ht--' + activePreloader).show();
-    });
-
-});
 
 
