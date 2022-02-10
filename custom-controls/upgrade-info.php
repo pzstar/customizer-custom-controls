@@ -3,7 +3,7 @@
 // Upgrade Text
 class Hash_Themes_Upgrade_Info_Control extends WP_Customize_Control {
 
-    public $type = 'hash-themes-upgrade-info';
+    public $type = 'ht--upgrade-info';
 
     public function render_content() {
         ?>

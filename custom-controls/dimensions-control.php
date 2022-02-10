@@ -9,7 +9,7 @@ class Hash_Themes_Dimensions_Control extends WP_Customize_Control {
      * @access public
      * @var string
      */
-    public $type = 'hash-themes-dimensions';
+    public $type = 'ht--dimensions';
     public $responsive = true;
 
     public function __construct($manager, $id, $args = array()) {
@@ -112,16 +112,16 @@ class Hash_Themes_Dimensions_Control extends WP_Customize_Control {
 
         <ul class="desktop control-wrap active">
             <# _.each( data.desktop, function( args, key ) { #>
-            <li class="hash-themes-dimension-wrap {{ key }}">
-                <input {{{ data.inputAttrs }}} type="number" class="hash-themes-dimension-{{ key }}" {{{ args.link }}} value="{{{ args.value }}}" />
-                    <span class="hash-themes-dimension-label">{{ data.l10n[ key ] }}</span>
+            <li class="ht--dimension-wrap {{ key }}">
+                <input {{{ data.inputAttrs }}} type="number" class="ht--dimension-{{ key }}" {{{ args.link }}} value="{{{ args.value }}}" />
+                    <span class="ht--dimension-label">{{ data.l10n[ key ] }}</span>
             </li>
             <# } ); #>
 
-            <li class="hash-themes-dimension-wrap">
-                <div class="hash-themes-link-dimensions">
-                    <span class="dashicons dashicons-admin-links hash-themes-linked" data-element="{{ data.id }}" title="{{ data.title }}"></span>
-                    <span class="dashicons dashicons-editor-unlink hash-themes-unlinked" data-element="{{ data.id }}" title="{{ data.title }}"></span>
+            <li class="ht--dimension-wrap">
+                <div class="ht--link-dimensions">
+                    <span class="dashicons dashicons-admin-links ht--linked" data-element="{{ data.id }}" title="{{ data.title }}"></span>
+                    <span class="dashicons dashicons-editor-unlink ht--unlinked" data-element="{{ data.id }}" title="{{ data.title }}"></span>
                 </div>
             </li>
         </ul>
@@ -129,16 +129,16 @@ class Hash_Themes_Dimensions_Control extends WP_Customize_Control {
         <# if ( data.responsive ) { #>
         <ul class="tablet control-wrap">
             <# _.each( data.tablet, function( args, key ) { #>
-            <li class="hash-themes-dimension-wrap {{ key }}">
-                <input {{{ data.inputAttrs }}} type="number" class="hash-themes-dimension-{{ key }}" {{{ args.link }}} value="{{{ args.value }}}" />
-                    <span class="hash-themes-dimension-label">{{ data.l10n[ key ] }}</span>
+            <li class="ht--dimension-wrap {{ key }}">
+                <input {{{ data.inputAttrs }}} type="number" class="ht--dimension-{{ key }}" {{{ args.link }}} value="{{{ args.value }}}" />
+                    <span class="ht--dimension-label">{{ data.l10n[ key ] }}</span>
             </li>
             <# } ); #>
 
-            <li class="hash-themes-dimension-wrap">
-                <div class="hash-themes-link-dimensions">
-                    <span class="dashicons dashicons-admin-links hash-themes-linked" data-element="{{ data.id }}_tablet" title="{{ data.title }}"></span>
-                    <span class="dashicons dashicons-editor-unlink hash-themes-unlinked" data-element="{{ data.id }}_tablet" title="{{ data.title }}"></span>
+            <li class="ht--dimension-wrap">
+                <div class="ht--link-dimensions">
+                    <span class="dashicons dashicons-admin-links ht--linked" data-element="{{ data.id }}_tablet" title="{{ data.title }}"></span>
+                    <span class="dashicons dashicons-editor-unlink ht--unlinked" data-element="{{ data.id }}_tablet" title="{{ data.title }}"></span>
                 </div>
             </li>
         </ul>
@@ -147,16 +147,16 @@ class Hash_Themes_Dimensions_Control extends WP_Customize_Control {
         <# if ( data.responsive ) { #>
         <ul class="mobile control-wrap">
             <# _.each( data.mobile, function( args, key ) { #>
-            <li class="hash-themes-dimension-wrap {{ key }}">
-                <input {{{ data.inputAttrs }}} type="number" class="hash-themes-dimension-{{ key }}" {{{ args.link }}} value="{{{ args.value }}}" />
-                    <span class="hash-themes-dimension-label">{{ data.l10n[ key ] }}</span>
+            <li class="ht--dimension-wrap {{ key }}">
+                <input {{{ data.inputAttrs }}} type="number" class="ht--dimension-{{ key }}" {{{ args.link }}} value="{{{ args.value }}}" />
+                    <span class="ht--dimension-label">{{ data.l10n[ key ] }}</span>
             </li>
             <# } ); #>
 
-            <li class="hash-themes-dimension-wrap">
-                <div class="hash-themes-link-dimensions">
-                    <span class="dashicons dashicons-admin-links hash-themes-linked" data-element="{{ data.id }}_mobile" title="{{ data.title }}"></span>
-                    <span class="dashicons dashicons-editor-unlink hash-themes-unlinked" data-element="{{ data.id }}_mobile" title="{{ data.title }}"></span>
+            <li class="ht--dimension-wrap">
+                <div class="ht--link-dimensions">
+                    <span class="dashicons dashicons-admin-links ht--linked" data-element="{{ data.id }}_mobile" title="{{ data.title }}"></span>
+                    <span class="dashicons dashicons-editor-unlink ht--unlinked" data-element="{{ data.id }}_mobile" title="{{ data.title }}"></span>
                 </div>
             </li>
         </ul>

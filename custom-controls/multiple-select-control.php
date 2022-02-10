@@ -3,7 +3,7 @@
 /** Dropdown Multiple Chooser Control */
 class Hash_Themes_Multiple_Select_Control extends WP_Customize_Control {
 
-    public $type = 'hash-themes-multiple-select';
+    public $type = 'ht--multiple-select';
     public $placeholder;
 
     public function __construct($manager, $id, $args = array()) {
@@ -29,7 +29,7 @@ class Hash_Themes_Multiple_Select_Control extends WP_Customize_Control {
             <?php }
             ?>
 
-            <select data-placeholder="<?php echo esc_attr($this->placeholder); ?>" multiple="multiple" class="hash-themes-chosen-select" <?php $this->link(); ?>>
+            <select data-placeholder="<?php echo esc_attr($this->placeholder); ?>" multiple="multiple" class="ht--chosen-select" <?php $this->link(); ?>>
                 <?php
                 foreach ($this->choices as $value => $label) {
                     $selected = '';

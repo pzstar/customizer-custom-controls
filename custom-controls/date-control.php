@@ -3,7 +3,7 @@
 /** Date Control */
 class Hash_Themes_Date_Control extends WP_Customize_Control {
 
-    public $type = 'hash-themes-date-picker';
+    public $type = 'ht--date-picker';
 
     public function render_content() {
         ?>
@@ -18,7 +18,7 @@ class Hash_Themes_Date_Control extends WP_Customize_Control {
                 </span>
             <?php } ?>
 
-            <input class="hash-themes-datepicker" type="text" autocomplete="off" value="<?php echo esc_attr($this->value()); ?>" <?php $this->link(); ?>>
+            <input class="ht--datepicker" type="text" autocomplete="off" value="<?php echo esc_attr($this->value()); ?>" <?php $this->link(); ?>>
         </label>
         <?php
     }

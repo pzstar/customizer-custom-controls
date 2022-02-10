@@ -116,26 +116,26 @@ class Hash_Themes_Background_Image_Control extends WP_Customize_Control {
         <span class="customize-control-title">{{{ data.label }}}</span>
         <# } #>
 
-        <div class="hash-themes-placeholder <# if ( data.image_url.value ) { #>hidden<# } #>">
+        <div class="ht--placeholder <# if ( data.image_url.value ) { #>hidden<# } #>">
             {{{ data.button_label.select }}}
         </div>
 
-        <div class="hash-themes-thumbnail">
+        <div class="ht--thumbnail">
             <# if ( data.image_url.value ) { #>
             <img src='{{ data.image_url.value }}'>
             <# } #>
         </div>
 
-        <div class="hash-themes-actions hash-themes-clearfix">
-            <button type="button" class="button hash-themes-upload-button align-left">{{{ data.button_label.select }}}</button>
-            <button type="button" class="button hash-themes-remove-button alignright">{{{ data.button_label.remove }}}</button>
+        <div class="ht--actions ht--clearfix">
+            <button type="button" class="button ht--upload-button align-left">{{{ data.button_label.select }}}</button>
+            <button type="button" class="button ht--remove-button alignright">{{{ data.button_label.remove }}}</button>
         </div>
 
-        <input class="hash-themes-background-image-url" type="hidden" value="{{ data.image_url.value }}" {{{ data.image_url.link }}}>
+        <input class="ht--background-image-url" type="hidden" value="{{ data.image_url.value }}" {{{ data.image_url.link }}}>
 
-               <input class="hash-themes-background-image-id" type="hidden" value="{{ data.image_id.value }}" {{{ data.image_id.link }}}>
+               <input class="ht--background-image-id" type="hidden" value="{{ data.image_id.value }}" {{{ data.image_id.link }}}>
 
-               <div class="hash-themes-background-image-fields" <# if ( !data.image_url.value ) { #> style="display:none "<# } #>>
+               <div class="ht--background-image-fields" <# if ( !data.image_url.value ) { #> style="display:none "<# } #>>
                <# if ( data.repeat && data.repeat.choices ) { #>
                <li class="background-image-repeat">
                 <# if ( data.repeat.label ) { #>

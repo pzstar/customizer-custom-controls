@@ -3,7 +3,7 @@
 /** Text Selector Control */
 class Hash_Themes_Text_Selector_Control extends WP_Customize_Control {
 
-    public $type = 'hash-themes-text-selector';
+    public $type = 'ht--text-selector';
     public $class = '';
 
     public function __construct($manager, $id, $args = array()) {
@@ -17,16 +17,16 @@ class Hash_Themes_Text_Selector_Control extends WP_Customize_Control {
         if (!empty($this->choices)) {
             ?>
             <label>
-                <div class="hash-themes-text-radio-container <?php echo esc_attr($this->class) ?>">
+                <div class="ht--text-radio-container <?php echo esc_attr($this->class) ?>">
                     <span class="customize-control-title">
                         <?php echo esc_html($this->label); ?>
                     </span>
 
-                    <div class="hash-themes-text-radio-buttons">
+                    <div class="ht--text-radio-buttons">
                         <?php foreach ($this->choices as $key => $value) { ?>
-                            <label class="hash-themes-text-radio-button-label">
+                            <label class="ht--text-radio-button-label">
                                 <input type="radio" name="<?php echo esc_attr($this->id); ?>" value="<?php echo esc_attr($key); ?>" <?php $this->link(); ?> <?php checked(esc_attr($key), $this->value()); ?>/>
-                                <div class="hash-themes-text-radio">
+                                <div class="ht--text-radio">
                                     <?php
                                     if (isset($value['icon'])) {
                                         echo '<span class="' . esc_attr($value['icon']) . '"></span>';

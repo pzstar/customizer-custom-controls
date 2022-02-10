@@ -25,7 +25,7 @@ class Hash_Themes_Image_Selector_Control extends WP_Customize_Control {
                     </span>
                 <?php } ?>
 
-                <select class="hash-themes-image-selector" <?php $this->link(); ?>>
+                <select class="ht--image-selector" <?php $this->link(); ?>>
                     <?php
                     foreach ($this->choices as $key => $choice) {
                         printf('<option data-image="%1$s" value="%2$s" %3$s>%4$s</option>', esc_attr($this->image_path . $key) . '.png', esc_attr($key), selected($this->value(), $key, false), esc_html($choice));
@@ -33,7 +33,7 @@ class Hash_Themes_Image_Selector_Control extends WP_Customize_Control {
                     ?>
                 </select>
 
-                <div class="hash-themes-image-container"><img src="<?php echo esc_url($this->image_path . $this->value() . '.png'); ?>"/></div>
+                <div class="ht--image-container"><img src="<?php echo esc_url($this->image_path . $this->value() . '.png'); ?>"/></div>
             </label>
             <?php
         }

@@ -2,7 +2,7 @@
 
 class Hash_Themes_Column_Control extends WP_Customize_Control {
 
-    public $type = 'hash-themes-column';
+    public $type = 'ht--column';
 
     public function __construct($manager, $id, $args = array()) {
         parent::__construct($manager, $id, $args);
@@ -11,7 +11,7 @@ class Hash_Themes_Column_Control extends WP_Customize_Control {
     public function enqueue() {
         wp_enqueue_script('nouislider', HASH_THEMES_CUSTOMIZER_URL . 'custom-controls/column-control/assets/nouislider.js', array('jquery'), HASH_THEMES_VERSION, true);
         wp_enqueue_script('wNumb', HASH_THEMES_CUSTOMIZER_URL . 'custom-controls/column-control/assets/wNumb.js', array('jquery'), HASH_THEMES_VERSION, true);
-        wp_enqueue_script('hash-themes-column-control', HASH_THEMES_CUSTOMIZER_URL . 'custom-controls/column-control/assets/column-control.js', array('jquery'), HASH_THEMES_VERSION, true);
+        wp_enqueue_script('ht--column-control', HASH_THEMES_CUSTOMIZER_URL . 'custom-controls/column-control/assets/column-control.js', array('jquery'), HASH_THEMES_VERSION, true);
 
         wp_enqueue_style('nouislider', HASH_THEMES_CUSTOMIZER_URL . 'custom-controls/column-control/assets/nouislider.css', array(), HASH_THEMES_VERSION);
     }
@@ -30,12 +30,12 @@ class Hash_Themes_Column_Control extends WP_Customize_Control {
             <?php
         endif;
 
-        echo '<div class="hash-themes-column-selector"></div>';
+        echo '<div class="ht--column-selector"></div>';
 
-        echo '<div class="hash-themes-column-selector-buttons">';
-        echo '<button class="hash-themes-remove-col"><i class="mdi mdi-minus"></i><span>' . esc_html('Remove Column', 'hash-themes') . '</span></button>';
-        echo '<button class="hash-themes-add-col"><i class="mdi mdi-plus"></i><span>' . esc_html('Add Column', 'hash-themes') . '</span></button>';
-        echo '<button class="hash-themes-reset-col"><i class="mdi mdi-cached"></i><span>' . esc_html('Reset Column', 'hash-themes') . '</span></button>';
+        echo '<div class="ht--column-selector-buttons">';
+        echo '<button class="ht--remove-col"><i class="mdi mdi-minus"></i><span>' . esc_html('Remove Column', 'hash-themes') . '</span></button>';
+        echo '<button class="ht--add-col"><i class="mdi mdi-plus"></i><span>' . esc_html('Add Column', 'hash-themes') . '</span></button>';
+        echo '<button class="ht--reset-col"><i class="mdi mdi-cached"></i><span>' . esc_html('Reset Column', 'hash-themes') . '</span></button>';
         echo '</div>';
         ?>
         <input type="hidden" value="<?php echo esc_attr($this->value()) ?>" <?php $this->link(); ?> />

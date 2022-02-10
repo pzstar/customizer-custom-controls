@@ -14,7 +14,7 @@ if (class_exists('WP_Customize_Section')) {
          * @access public
          * @var    string
          */
-        public $type = 'hash-themes-toggle-section';
+        public $type = 'ht--toggle-section';
 
         /**
          * Flag to display icon when entering in customizer
@@ -69,7 +69,7 @@ if (class_exists('WP_Customize_Section')) {
          * @return void
          */
         public function enqueue() {
-            wp_enqueue_script('hash-themes-toggle-section', HASH_THEMES_CUSTOMIZER_URL . 'custom-controls/assets/js/toggle-section.js', array('jquery'), HASH_THEMES_VERSION, true);
+            wp_enqueue_script('ht--toggle-section', HASH_THEMES_CUSTOMIZER_URL . 'custom-controls/assets/js/toggle-section.js', array('jquery'), HASH_THEMES_VERSION, true);
         }
 
         /**
@@ -81,12 +81,12 @@ if (class_exists('WP_Customize_Section')) {
         protected function render_template() {
             ?>
             <li id="accordion-section-{{ data.id }}" class="accordion-section control-section control-section-{{ data.type }}">
-                <h3 class="accordion-section-title <# if ( data.hide != 'on' ) { #> hash-themes-section-visible <# } else { #> hash-themes-section-hidden <# }#>" tabindex="0">
+                <h3 class="accordion-section-title <# if ( data.hide != 'on' ) { #> ht--section-visible <# } else { #> ht--section-hidden <# }#>" tabindex="0">
                     {{ data.title }}
                     <# if ( data.hide != 'on' ) { #>
-                    <a data-control="{{ data.hiding_control }}" class="hash-themes-toggle-section" href="#"><span class="dashicons dashicons-visibility"></span></a>
+                    <a data-control="{{ data.hiding_control }}" class="ht--toggle-section" href="#"><span class="dashicons dashicons-visibility"></span></a>
                     <# } else { #>
-                    <a data-control="{{ data.hiding_control }}" class="hash-themes-toggle-section" href="#"><span class="dashicons dashicons-hidden"></span></a>
+                    <a data-control="{{ data.hiding_control }}" class="ht--toggle-section" href="#"><span class="dashicons dashicons-hidden"></span></a>
                     <# } #>
                 </h3>
                 <ul class="accordion-section-content">

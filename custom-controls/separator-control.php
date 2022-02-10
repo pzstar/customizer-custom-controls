@@ -8,7 +8,7 @@ class Hash_Themes_Separator_Control extends WP_Customize_Control {
      *
      * @var string
      */
-    public $type = 'hash-themes-separator';
+    public $type = 'ht--separator';
 
     /**
      * Control method

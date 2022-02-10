@@ -3,7 +3,7 @@
 /** Selector Control */
 class Hash_Themes_Selector_Control extends WP_Customize_Control {
 
-    public $type = 'hash-themes-selector';
+    public $type = 'ht--selector';
     public $options = array();
     public $class = '';
 
@@ -27,7 +27,7 @@ class Hash_Themes_Selector_Control extends WP_Customize_Control {
                 </span>
             <?php } ?>
 
-            <div class="hash-themes-selector-labels <?php echo esc_attr($this->class) ?>">
+            <div class="ht--selector-labels <?php echo esc_attr($this->class) ?>">
                 <?php
                 foreach ($options as $key => $image) {
                     $selected_class = ( $this->value() == $key ) ? 'selector-selected' : '';

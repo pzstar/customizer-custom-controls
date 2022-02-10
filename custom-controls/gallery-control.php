@@ -2,7 +2,7 @@
 
 class Hash_Themes_Gallery_Control extends WP_Customize_Control {
 
-    public $type = 'hash-themes-gallery';
+    public $type = 'ht--gallery';
 
     public function render_content() {
         ?>
@@ -17,13 +17,13 @@ class Hash_Themes_Gallery_Control extends WP_Customize_Control {
                 </span>
             <?php } ?>
 
-            <ul class="hash-themes-gallery-container">
+            <ul class="ht--gallery-container">
                 <?php
                 if ($this->value()) {
                     $images = explode(',', $this->value());
                     foreach ($images as $image) {
                         $image_src = wp_get_attachment_image_src($image, 'thumbnail');
-                        echo '<li data-id="' . $image . '"><span style="background-image:url(' . $image_src[0] . ')"></span><a href="#" class="hash-themes-gallery-remove">×</a></li>';
+                        echo '<li data-id="' . $image . '"><span style="background-image:url(' . $image_src[0] . ')"></span><a href="#" class="ht--gallery-remove">×</a></li>';
                     }
                 }
                 ?>
@@ -31,7 +31,7 @@ class Hash_Themes_Gallery_Control extends WP_Customize_Control {
 
             <input type="hidden" <?php echo esc_attr($this->link()) ?> value="<?php echo esc_attr($this->value()); ?>" />
 
-            <a href="#" class="button hash-themes-gallery-button"><?php esc_html_e('Add Images', 'hash-themes') ?></a>
+            <a href="#" class="button ht--gallery-button"><?php esc_html_e('Add Images', 'hash-themes') ?></a>
         </label>
         <?php
     }

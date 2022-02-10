@@ -25,7 +25,7 @@ class Hash_Themes_Preloader_Selector_Control extends WP_Customize_Control {
                     </span>
                 <?php } ?>
 
-                <select class="hash-themes-preloader-selector" <?php $this->link(); ?>>
+                <select class="ht--preloader-selector" <?php $this->link(); ?>>
                     <?php
                     foreach ($this->choices as $key => $choice) {
                         printf('<option value="%1$s" %2$s>%3$s</option>', esc_attr($key), selected($this->value(), $key, false), esc_html($choice));
@@ -33,11 +33,11 @@ class Hash_Themes_Preloader_Selector_Control extends WP_Customize_Control {
                     ?>
                 </select>
 
-                <div class="hash-themes-preloader-container">
+                <div class="ht--preloader-container">
                     <?php
                     foreach ($this->choices as $key => $choice) {
                         $style = ($this->value() != $key) ? 'style="display:none"' : '';
-                        echo '<div class="hash-themes-preloader hash-themes-' . $key . '" ' . $style . '>';
+                        echo '<div class="ht--preloader ht--' . $key . '" ' . $style . '>';
                         $preloader_path = trailingslashit($this->file_path) . $key . '.php';
                         if (file_exists($preloader_path)) {
                             require_once $preloader_path;

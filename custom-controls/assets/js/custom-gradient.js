@@ -1,10 +1,10 @@
 jQuery(document).ready(function ($) {
-    $('.hash-themes-gradient-box').each(function () {
-        var $pickerId = $(this).find('.hash-themes-gradient-picker');
-        var $inputId = $(this).find('.hash-themes-gradient-val');
-        var $previewId = $(this).find('.hash-themes-gradient-preview');
-        var $directionId = $(this).find('.hash-themes-gradient-direction');
-        var $customGradId = $(this).find('.hash-themes-gradient-custom')
+    $('.ht--gradient-box').each(function () {
+        var $pickerId = $(this).find('.ht--gradient-picker');
+        var $inputId = $(this).find('.ht--gradient-val');
+        var $previewId = $(this).find('.ht--gradient-preview');
+        var $directionId = $(this).find('.ht--gradient-direction');
+        var $customGradId = $(this).find('.ht--gradient-custom')
         var defaultColor = $(this).attr('data-default-color');
         var orientation = $directionId.children('option:selected').val();
         var value = $inputId.val();
@@ -79,7 +79,7 @@ jQuery(document).ready(function ($) {
 
             if (direction == 'custom') {
                 $customGradId.slideDown('fast');
-                orientation = $(this).closest('.hash-themes-gradient-box').find('.ui-slider-handle > span').text();
+                orientation = $(this).closest('.ht--gradient-box').find('.ui-slider-handle > span').text();
                 $pickerId.data("ClassyGradient").setOrientation(orientation);
                 var newCSS = $pickerId.data('ClassyGradient').getCSS();
                 newCSS = newCSS.replace('url(data:image/svg+xml;base64,', '');
@@ -102,7 +102,7 @@ jQuery(document).ready(function ($) {
             $inputId.val(newCSS).trigger('change');
         });
 
-        $(this).find('.hash-themes-gradient-range').slider({
+        $(this).find('.ht--gradient-range').slider({
             range: "min",
             value: deg,
             min: 0,

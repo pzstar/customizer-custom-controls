@@ -3,7 +3,7 @@
 /** Icon Chooser */
 class Hash_Themes_Icon_Selector_Control extends WP_Customize_Control {
 
-    public $type = 'hash-themes-icon-selector';
+    public $type = 'ht--icon-selector';
     //See customizer-fonts-iucon.php file
     public $icon_array;
 
@@ -43,13 +43,13 @@ class Hash_Themes_Icon_Selector_Control extends WP_Customize_Control {
             <# } #>
 
 
-            <div class="hash-themes-icon-box-wrap">
-                <div class="hash-themes-selected-icon">
+            <div class="ht--icon-box-wrap">
+                <div class="ht--selected-icon">
                     <i class="{{ data.value }}"></i>
-                    <span><i class="hash-themes-down-icon"></i></span>
+                    <span><i class="ht--down-icon"></i></span>
                 </div>
-                <div class="hash-themes-icon-box">
-                    <div class="hash-themes-icon-search">
+                <div class="ht--icon-box">
+                    <div class="ht--icon-search">
                         <select>
                             <# if ( data.icon_array ) { #>
                             <# _.each( data.icon_array, function( val ) {
@@ -60,12 +60,12 @@ class Hash_Themes_Icon_Selector_Control extends WP_Customize_Control {
                             <# } ) #>
                             <# } #>
                         </select>
-                        <input type="text" class="hash-themes-icon-search-input" placeholder="{{ data.filter_text }}" />
+                        <input type="text" class="ht--icon-search-input" placeholder="{{ data.filter_text }}" />
                     </div>
 
                     <# if ( data.icon_array ) { #>
                     <# _.each( data.icon_array, function( val ) { #>
-                    <ul class="hash-themes-icon-list {{val['name']}}">
+                    <ul class="ht--icon-list {{val['name']}}">
                         <# if (_.isArray(val['icons'])) { #>
                         <# _.each( val['icons'], function( icon ) { #>
                         <li class='<# if ( icon === data.value ) { #> icon-active <# } #>'><i class="{{val['displayPrefix']}} {{val['prefix']}}{{icon}}"></i></li>

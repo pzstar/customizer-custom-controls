@@ -3,7 +3,7 @@
 /** Gradient Control */
 class Hash_Themes_Gradient_Control extends WP_Customize_Control {
 
-    public $type = 'hash-themes-gradient';
+    public $type = 'ht--gradient';
     public $params = array();
 
     public function __construct($manager, $id, $args = array()) {
@@ -45,38 +45,38 @@ class Hash_Themes_Gradient_Control extends WP_Customize_Control {
         $angle_label = isset($params['angle_label']) ? $params['angle_label'] : esc_html__("Define Gradient Direction", 'hash-themes');
         $preview_label = isset($params['preview_label']) ? $params['preview_label'] : esc_html__("Gradient Preview", 'hash-themes');
         ?>
-        <div class="hash-themes-gradient-box" data-default-color="<?php echo esc_attr($default_color); ?>">
+        <div class="ht--gradient-box" data-default-color="<?php echo esc_attr($default_color); ?>">
 
-            <div class="hash-themes-gradient-row">
-                <div class="hash-themes-gradient-label"><?php echo esc_html($picker_label); ?></div>
-                <div class="hash-themes-gradient-picker"></div>
-                <div class="hash-themes-gradient-description"><?php echo esc_html($picker_description); ?></div>
+            <div class="ht--gradient-row">
+                <div class="ht--gradient-label"><?php echo esc_html($picker_label); ?></div>
+                <div class="ht--gradient-picker"></div>
+                <div class="ht--gradient-description"><?php echo esc_html($picker_description); ?></div>
             </div>
 
-            <div class="hash-themes-gradient-row">
-                <div class="hash-themes-gradient-label"><?php echo esc_html($angle_label); ?></div>
-                <select class="hash-themes-gradient-direction">
+            <div class="ht--gradient-row">
+                <div class="ht--gradient-label"><?php echo esc_html($angle_label); ?></div>
+                <select class="ht--gradient-direction">
                     <option value="vertical"><?php echo esc_html__('Vertical Spread (Top to Bottom)', 'hash-themes'); ?></option>
                     <option value="horizontal"><?php echo esc_html__('Horizontal Spread (Left To Right)', 'hash-themes'); ?></option>
                     <option value="custom"><?php echo esc_html__('Custom Angle Spread', 'hash-themes'); ?></option>
                 </select>
             </div>
 
-            <div class="hash-themes-gradient-row">
-                <div class="hash-themes-gradient-custom" style="display: none;">
-                    <div class="hash-themes-gradient-label"><?php echo esc_html__('Define Custom Angle', 'hash-themes'); ?></div>
-                    <div class="hash-themes-gradient-angle-slider">
-                        <div class="hash-themes-gradient-range"></div>
+            <div class="ht--gradient-row">
+                <div class="ht--gradient-custom" style="display: none;">
+                    <div class="ht--gradient-label"><?php echo esc_html__('Define Custom Angle', 'hash-themes'); ?></div>
+                    <div class="ht--gradient-angle-slider">
+                        <div class="ht--gradient-range"></div>
                     </div>
                 </div>
             </div>
             <!--
-              <div class="hash-themes-gradient-row">
-              <div class="hash-themes-gradient-label"><?php echo esc_html($preview_label); ?></div>
-              <div class="hash-themes-gradient-preview"></div>
+              <div class="ht--gradient-row">
+              <div class="ht--gradient-label"><?php echo esc_html($preview_label); ?></div>
+              <div class="ht--gradient-preview"></div>
               </div>
             -->
-            <input type="hidden" class="<?php echo esc_attr($type); ?> <?php echo esc_attr($class) ?> hash-themes-gradient-val"  value="<?php echo esc_attr($this->value()) ?>" <?php $this->link(); ?> />
+            <input type="hidden" class="<?php echo esc_attr($type); ?> <?php echo esc_attr($class) ?> ht--gradient-val"  value="<?php echo esc_attr($this->value()) ?>" <?php $this->link(); ?> />
         </div>
         <?php
     }

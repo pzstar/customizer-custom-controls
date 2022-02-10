@@ -12,13 +12,6 @@ class Hash_Themes_Editor_Control extends WP_Customize_Control {
     private $include_admin_print_footer = false;
 
     /**
-     * Flag to load teeny.
-     *
-     * @var bool|mixed
-     */
-    private $teeny = false;
-
-    /**
      * Hash_Themes_Page_Editor constructor.
      *
      * @param WP_Customize_Manager $manager Manager.
@@ -30,10 +23,6 @@ class Hash_Themes_Editor_Control extends WP_Customize_Control {
 
         if (!empty($args['include_admin_print_footer'])) {
             $this->include_admin_print_footer = $args['include_admin_print_footer'];
-        }
-
-        if (!empty($args['teeny'])) {
-            $this->teeny = $args['teeny'];
         }
     }
 
@@ -48,8 +37,9 @@ class Hash_Themes_Editor_Control extends WP_Customize_Control {
         <?php
         $settings = array(
             'textarea_name' => $this->id,
-            'teeny' => $this->teeny,
-            'textarea_rows' => 6
+            'teeny' => true,
+            'textarea_rows' => 6,
+            'media_buttons' => false
         );
 
         $page_content = $this->value();

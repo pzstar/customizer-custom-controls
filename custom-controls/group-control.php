@@ -3,7 +3,7 @@
 /** Control Tab */
 class Hash_Themes_Group_Control extends WP_Customize_Control {
 
-    public $type = 'hash-themes-group';
+    public $type = 'ht--group';
     public $params = '';
 
     public function __construct($manager, $id, $args = array()) {
@@ -25,14 +25,14 @@ class Hash_Themes_Group_Control extends WP_Customize_Control {
 
     public function content_template() {
         ?>
-        <div class="hash-themes-group-wrap">
-            <div class="hash-themes-group-heading">
+        <div class="ht--group-wrap">
+            <div class="ht--group-heading">
                 <# if ( data.heading ) { #>
                 <label>{{{ data.heading }}}</label>
                 <# } #>
             </div>
 
-            <div class="hash-themes-group-content"></div>
+            <div class="ht--group-content"></div>
         </div>
         <?php
     }

@@ -10,7 +10,7 @@ if (class_exists('WP_Customize_Section')) {
          * @access public
          * @var    string
          */
-        public $type = 'hash-themes-upgrade-section';
+        public $type = 'ht--upgrade-section';
 
         /**
          * Custom button text to output.
