@@ -209,6 +209,10 @@
 }
 
 /* Customizer Icon Selector */
+#ht--icon-box{
+    display: none;
+}
+
 .ht--icon-box-wrap .ht--icon-box {
     display: none;
 }
