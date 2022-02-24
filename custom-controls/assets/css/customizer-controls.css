@@ -118,44 +118,6 @@
     float: none;
 }
 
-/* Checkbox CSS 
-.customize-control-checkbox label {
-    margin-left: 0;
-}
-
-.customize-control-checkbox input[type='checkbox'],
-.customize-control-ht--checkbox-multiple input[type='checkbox'] {
-    width: 20px;
-    height: 20px;
-    background: #fff;
-    -webkit-box-shadow: 0 0 1px #bcbcbc inset;
-    box-shadow: 0 0 1px #bcbcbc inset;
-    border: 0;
-    position: relative;
-    -webkit-transition: all 150ms ease-in;
-    transition: all 150ms ease-in;
-}
-
-.customize-control-checkbox input[type='checkbox']:checked,
-.customize-control-ht--checkbox-multiple input[type='checkbox']:checked {
-    -webkit-box-shadow: 0 0 1px transparent inset;
-    box-shadow: 0 0 1px transparent inset;
-}
-
-.customize-control-checkbox input[type='checkbox']:checked:before,
-.customize-control-ht--checkbox-multiple input[type='checkbox']:checked:before {
-    position: absolute;
-    left: 12px;
-    top: 7px;
-    width: 3px;
-    height: 8px;
-    border: solid #333;
-    border-width: 0 2px 2px 0;
-    -webkit-transform: rotate(45deg);
-    transform: rotate(45deg);
-    content: '';
-}
-*/
 /* Customizer Header */
 .customize-control-ht--heading h3,
 .customize-control-ht--typography .customize-control-title{
@@ -633,7 +595,7 @@
 }
 
 /* Customizer Background Image */
-.customize-control-background-image .ht--placeholder {
+.customize-control-ht--background-image .ht--placeholder {
     width: 100%;
     position: relative;
     text-align: center;
@@ -644,35 +606,35 @@
     line-height: 20px;
 }
 
-.customize-control-background-image .ht--thumbnail img{
+.customize-control-ht--background-image .ht--thumbnail img{
     display: block;
 }
 
-.customize-control-background-image .ht--actions {
+.customize-control-ht--background-image .ht--actions {
     margin: 10px 0;
 }
 
-.customize-control-background-image .ht--background-image-fields li:not(.background-image-overlay) {
+.customize-control-ht--background-image .ht--background-image-fields li:not(.ht--background-image-overlay) {
     display: flex;
     justify-content: space-between;
     margin-bottom: 10px;
 }
 
-.customize-control-background-image .ht--background-image-fields li:not(.background-image-overlay) span.customize-control-title {
+.customize-control-ht--background-image .ht--background-image-fields li:not(.ht--background-image-overlay) span.customize-control-title {
     width: 40%;
 }
 
-.customize-control-background-image .ht--background-image-fields li select {
+.customize-control-ht--background-image .ht--background-image-fields li select {
     width: 60%;
 }
 
-.customize-control-background-image .background-image-overlay,
-.customize-control-background-image .background-image-color{
+.customize-control-ht--background-image .ht--background-image-overlay,
+.customize-control-ht--background-image .ht--background-image-color{
     position: relative;
 }
 
-.customize-control-background-image .background-image-overlay .customize-control-title,
-.customize-control-background-image .background-image-color .customize-control-title{
+.customize-control-ht--background-image .ht--background-image-overlay .customize-control-title,
+.customize-control-ht--background-image .ht--background-image-color .customize-control-title{
     margin-right: 40px;
 }
 

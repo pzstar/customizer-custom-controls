@@ -693,16 +693,16 @@ function hash_themes_set_bg_color_value($container, $element, $obj) {
 }
 
 (function (api) {
-    api.controlConstructor['background-image'] = api.Control.extend({
+    api.controlConstructor['ht--background-image'] = api.Control.extend({
         ready: function () {
             var control = this;
             control.container.on('click', '.ht--upload-button', function (event) {
                 event.preventDefault();
-                var imgContainer = jQuery(this).closest('.customize-control-background-image').find('.ht--thumbnail'),
-                        placeholder = jQuery(this).closest('.customize-control-background-image').find('.ht--placeholder'),
-                        imgIdInput = jQuery(this).closest('.customize-control-background-image').find('.ht--background-image-id'),
-                        imgUrlInput = jQuery(this).closest('.customize-control-background-image').find('.ht--background-image-url'),
-                        backgroundFields = jQuery(this).closest('.customize-control-background-image').find('.ht--background-image-fields');
+                var imgContainer = jQuery(this).closest('.customize-control-ht--background-image').find('.ht--thumbnail'),
+                        placeholder = jQuery(this).closest('.customize-control-ht--background-image').find('.ht--placeholder'),
+                        imgIdInput = jQuery(this).closest('.customize-control-ht--background-image').find('.ht--background-image-id'),
+                        imgUrlInput = jQuery(this).closest('.customize-control-ht--background-image').find('.ht--background-image-url'),
+                        backgroundFields = jQuery(this).closest('.customize-control-ht--background-image').find('.ht--background-image-fields');
                 var frame = wp.media({
                     title: 'Select or Upload Image',
                     button: {
@@ -725,11 +725,11 @@ function hash_themes_set_bg_color_value($container, $element, $obj) {
             // DELETE IMAGE LINK
             control.container.on('click', '.ht--remove-button', function (event) {
                 event.preventDefault();
-                var imgContainer = jQuery(this).closest('.customize-control-background-image').find('.ht--thumbnail'),
-                        placeholder = jQuery(this).closest('.customize-control-background-image').find('.ht--placeholder'),
-                        imgIdInput = jQuery(this).closest('.customize-control-background-image').find('.ht--background-image-id'),
-                        imgUrlInput = jQuery(this).closest('.customize-control-background-image').find('.ht--background-image-url'),
-                        backgroundFields = jQuery(this).closest('.customize-control-background-image').find('.ht--background-image-fields');
+                var imgContainer = jQuery(this).closest('.customize-control-ht--background-image').find('.ht--thumbnail'),
+                        placeholder = jQuery(this).closest('.customize-control-ht--background-image').find('.ht--placeholder'),
+                        imgIdInput = jQuery(this).closest('.customize-control-ht--background-image').find('.ht--background-image-id'),
+                        imgUrlInput = jQuery(this).closest('.customize-control-ht--background-image').find('.ht--background-image-url'),
+                        backgroundFields = jQuery(this).closest('.customize-control-ht--background-image').find('.ht--background-image-fields');
                 imgContainer.find('img').remove();
                 placeholder.removeClass('hidden');
                 imgIdInput.val('').trigger('change');
@@ -737,20 +737,20 @@ function hash_themes_set_bg_color_value($container, $element, $obj) {
                 backgroundFields.hide();
             });
 
-            control.container.on('change', '.background-image-repeat select', function () {
+            control.container.on('change', '.ht--background-image-repeat select', function () {
                 control.settings['repeat'].set(jQuery(this).val());
             });
-            control.container.on('change', '.background-image-size select', function () {
+            control.container.on('change', '.ht--background-image-size select', function () {
                 control.settings['size'].set(jQuery(this).val());
             });
-            control.container.on('change', '.background-image-attachment select', function () {
+            control.container.on('change', '.ht--background-image-attachment select', function () {
                 control.settings['attachment'].set(jQuery(this).val());
             });
-            control.container.on('change', '.background-image-position select', function () {
+            control.container.on('change', '.ht--background-image-position select', function () {
                 control.settings['position'].set(jQuery(this).val());
             });
-            hash_themes_set_bg_color_value(control.container, '.background-image-color input', control.settings['color']);
-            hash_themes_set_bg_color_value(control.container, '.background-image-overlay input', control.settings['overlay']);
+            hash_themes_set_bg_color_value(control.container, '.ht--background-image-color input', control.settings['color']);
+            hash_themes_set_bg_color_value(control.container, '.ht--background-image-overlay input', control.settings['overlay']);
         }
     });
 
