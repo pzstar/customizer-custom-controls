@@ -85,6 +85,8 @@ jQuery(document).ready(function ($) {
         } else if (count == 5) {
             columnSelectorReset.noUiSlider.set([16.66, 33.33, 50, 66.66, 83.33]);
         }
+        
+        return false;
     });
 
     function update_nouislider(columnSelector, $elements) {

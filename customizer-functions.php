@@ -69,7 +69,7 @@ if (!function_exists('hash_themes_icon_choices')) {
         echo '<select>';
 
         //See customizer-icon-manager.php file
-        $icons = apply_filters('hash_theme_register_icon', array());
+        $icons = apply_filters('hash_themes_register_icon', array());
 
         if ($icons && is_array($icons)) {
             foreach ($icons as $icon) {
@@ -84,12 +84,13 @@ if (!function_exists('hash_themes_icon_choices')) {
         echo '</div>';
 
         if ($icons && is_array($icons)) {
+            $active_class = ' active';
             foreach ($icons as $icon) {
                 $icon_name = isset($icon['name']) && $icon['name'] ? $icon['name'] : '';
                 $icon_prefix = isset($icon['prefix']) && $icon['prefix'] ? $icon['prefix'] : '';
                 $icon_displayPrefix = isset($icon['displayPrefix']) && $icon['displayPrefix'] ? $icon['displayPrefix'] . ' ' : '';
 
-                echo '<ul class="ht--icon-list ' . esc_attr($icon_name) . '">';
+                echo '<ul class="ht--icon-list ' . esc_attr($icon_name) . esc_attr($active_class) . '">';
                 $icon_array = isset($icon['icons']) ? $icon['icons'] : '';
                 if (is_array($icon_array)) {
                     foreach ($icon_array as $icon_id) {
@@ -97,6 +98,7 @@ if (!function_exists('hash_themes_icon_choices')) {
                     }
                 }
                 echo '</ul>';
+                $active_class = '';
             }
         }
 

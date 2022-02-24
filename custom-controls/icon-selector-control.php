@@ -4,11 +4,13 @@
 class Hash_Themes_Icon_Selector_Control extends WP_Customize_Control {
 
     public $type = 'ht--icon-selector';
-    //See customizer-fonts-iucon.php file
-    public $icon_array;
+    //See customizer-fonts-icon.php file
+    public $icon_array = array();
 
     public function __construct($manager, $id, $args = array()) {
-        $this->icon_array = apply_filters('hash_themes_register_icon', array());
+        if (isset($args['icon_array'])) {
+            $this->icon_array = array_map(array($this, 'wp_parse_args'), $args['icon_array']);
+        }
         parent::__construct($manager, $id, $args);
     }
 
@@ -17,7 +19,11 @@ class Hash_Themes_Icon_Selector_Control extends WP_Customize_Control {
         $this->json['filter_text'] = esc_attr__('Type to filter', 'hash-themes');
         $this->json['value'] = $this->value();
         $this->json['link'] = $this->get_link();
-        $this->json['icon_array'] = wp_parse_args($this->icon_array, array(
+        $this->json['icon_array'] = $this->icon_array;
+    }
+
+    public function wp_parse_args($icon_array) {
+        return wp_parse_args($icon_array, array(
             'name' => '',
             'label' => '',
             'prefix' => '',
@@ -49,10 +55,10 @@ class Hash_Themes_Icon_Selector_Control extends WP_Customize_Control {
                     <span><i class="ht--down-icon"></i></span>
                 </div>
 
-                <# if ( data.icon_array ) { #>
+                <# if ( !_.isEmpty(data.icon_array) ) { #>
                 <div class="ht--icon-box">
                     <div class="ht--icon-search">
-                        <# if ( count(data.icon_array) > 1 ) { #>
+                        <# if ( _.size(data.icon_array) > 1 ) { #>
                         <select>
                             <# _.each( data.icon_array, function( val ) { #>
                             <#  if (val['name'] && val['label']) { #>
@@ -65,15 +71,20 @@ class Hash_Themes_Icon_Selector_Control extends WP_Customize_Control {
                     </div>
 
 
-                    <# _.each( data.icon_array, function( val ) { #>
-                    <ul class="ht--icon-list {{val['name']}}">
+                    <# 
+                    var index = 0;
+                    _.each( data.icon_array, function( val ) { 
+                    #>
+                    <ul class="ht--icon-list {{val['name']}} <# if( index == 0 ){ #>active<# } #>">
                         <# if (_.isArray(val['icons'])) { #>
                         <# _.each( val['icons'], function( icon ) { #>
                         <li class='<# if ( icon === data.value ) { #> icon-active <# } #>'><i class="{{val['displayPrefix']}} {{val['prefix']}}{{icon}}"></i></li>
                         <# } ) #>
                         <# } #>
                     </ul>
-                    <# } ) #>
+                    <#  
+                    index++;
+                    } ) #>
                 </div>
                 <# } #>
                 <input type="hidden" value="{{ data.value }}" {{{ data.link }}} />

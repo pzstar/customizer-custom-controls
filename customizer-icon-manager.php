@@ -19,7 +19,7 @@ class Hash_Themes_Icon_Manager {
         add_filter('hash_themes_register_icon', array($this, 'icons'));
     }
 
-    public function icons($icons_args = array()) {
+    public function icons() {
         $icons_args = array(
             'hash-themes-icofont-icon' => array(
                 'name' => 'hash-themes-icofont-icon',
