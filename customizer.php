@@ -1,8 +1,10 @@
 <?php
 
 define('HASH_THEMES_VERSION', '1.0.0');
-define('HASH_THEMES_CUSTOMIZER_URL', get_template_directory_uri() . '/inc/customizer/custom-controls/');
-define('HASH_THEMES_CUSTOMIZER_PATH', get_template_directory() . '/inc/customizer/custom-controls/');
+define('HASH_THEMES_CUSTOMIZER_URL', get_template_directory_uri() . '/inc/customizer-custom-controls
+/');
+define('HASH_THEMES_CUSTOMIZER_PATH', get_template_directory() . '/inc/customizer-custom-controls
+/');
 
 require HASH_THEMES_CUSTOMIZER_PATH . 'customizer-custom-controls.php';
 require HASH_THEMES_CUSTOMIZER_PATH . 'custom-controls/typography/typography.php';
