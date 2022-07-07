@@ -74,7 +74,7 @@ if (!function_exists('hash_themes_icon_choices')) {
         if ($icons && is_array($icons)) {
             foreach ($icons as $icon) {
                 if ($icon['name'] && $icon['label']) {
-                    echo '<option value="' . esc_attr($icon['name']) . '">' . esc_html__($icon['label']) . '</option>';
+                    echo '<option value="' . esc_attr($icon['name']) . '">' . esc_html($icon['label']) . '</option>';
                 }
             }
         }
