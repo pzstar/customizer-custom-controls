@@ -131,9 +131,9 @@ class Hash_Themes_Background_Image_Control extends WP_Customize_Control {
             <button type="button" class="button ht--remove-button alignright">{{{ data.button_label.remove }}}</button>
         </div>
 
-        <input class="ht--ht--background-image-url" type="hidden" value="{{ data.image_url.value }}" {{{ data.image_url.link }}}>
+        <input class="ht--background-image-url" type="hidden" value="{{ data.image_url.value }}" {{{ data.image_url.link }}}>
 
-               <input class="ht--ht--background-image-id" type="hidden" value="{{ data.image_id.value }}" {{{ data.image_id.link }}}>
+               <input class="ht--background-image-id" type="hidden" value="{{ data.image_id.value }}" {{{ data.image_id.link }}}>
 
                <div class="ht--background-image-fields" <# if ( !data.image_url.value ) { #> style="display:none "<# } #>>
                <# if ( data.repeat && data.repeat.choices ) { #>
